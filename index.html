@@ -51,6 +51,7 @@
     </script>
 
     <!-- Uncomment for App -->
+    <script type="text/javascript" src="cordova.js"></script>
     <script> server = "live"; </script>
 
     <meta http-equiv="Content-Security-Policy" content="default-src * gap://ready file:; style-src 'self' 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
@@ -178,6 +179,10 @@
     <div id="shield" class="offline shield" ng-show="offline"></div>
     <!-- END OFFLINE STUFF -->
 
+    <!-- APP UPDATE STUFF -->
+    <div class="update" ng-if="updateAvailable" update-page></div>
+    <div id="shield" class="offline shield" ng-if="updateAvailable"></div>
+    <!-- END APP UPDATE STUFF -->
 
     <div id="shield" class="shield" ng-click="closeMenu($event);"></div>
 
@@ -186,32 +191,27 @@
     <!-- Styles -->
     <link href="css/styles.css" rel="stylesheet" type="text/css" />
 
-    <!-- Stripe -->
-    <script>
-      if (stripePublicKey) {
-        async('https://js.stripe.com/v2/', function() {
-          Stripe.setPublishableKey(stripePublicKey);
-        });
-      }
-      if (server === "live") {
-        async('cordova.js', function() {
-          console.log("cordova.js loaded");
-        });
-      } else {
-        console.log("do not load cordova.js");
-      }
-    </script>
-
     <!-- TrueBlue Scripts -->
     <script type="text/javascript" src="js/trueBlue.other.min.js"></script>
     <script type="text/javascript" src="js/trueBlue.angular.min.js"></script>
     <script type="text/javascript" src="js/trueBlue.app.min.js"></script>
     <script type="text/javascript" src="js/trueBlue.override.js"></script>
 
+    <!-- Stripe -->
+    <script>
+      if (typeof stripePublicKey != "undefined" && stripePublicKey != "") {
+        async('https://js.stripe.com/v2/', function() {
+          Stripe.setPublishableKey(stripePublicKey);
+        });
+      }
+    </script>
+
     <!-- Inline JS -->
     <script type="text/javascript">
       // init for redundancy
-      openFB.init({appId: '1523899957830230', tokenStore: window.localStorage});
+      if (typeof facebookConnectPlugin === "undefined") {
+        openFB.init({appId: '1523899957830230', tokenStore: window.localStorage});
+      }
 
       function onLoad() {
         // testing.
