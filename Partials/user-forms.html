@@ -1,0 +1,78 @@
+          <!-- LOGIN/REGISTRATION -->
+          <li id="facebook" class="login register">
+            <a href="#facebook" class="FRE14 SP12">
+              <div class="icon" rel="facebook"></div>
+              {{text.formFacebookConnect}}
+            </a>
+          </li>
+          <li id="facebook-loading" class="facebook">
+            <br>
+            {{text.connectingToFB}}
+            <div class="spinner">
+              <div class="dot1"></div>
+              <div class="dot2"></div>
+            </div>
+          </li>
+          <li class="spacer login register or">{{text.or}}</li>
+          <li id="login" class="login register">
+            <a href="#login" class="noicon SP12">{{text.formLogin}}</a>
+            <a href="#close" class="icon login" rel="close"></a>
+          </li>
+          <li class="login">
+            <form method="post" name="login" id="login">
+              <div class="liner width"></div>
+              <input type="email" name="username" placeholder="{{text.formEmail}}" required="required" /><br>
+              <div class="liner width"></div>
+              <input type="password" name="password" placeholder="{{text.formPassword}}" required="required" /><br>
+              <div class="liner width"></div>
+              <div class="short error"></div>
+              <div class="input-w-icon ">
+                <div class="icon" rel="trueblue-line"></div>
+                <input type="submit" name="submit" value="{{text.formLoginTo}}" submit-btn class="centered FRE12 SP12" />
+              </div>
+              <div class="liner width"></div>
+            </form>
+            <a class="short SP12" href="#forgot">{{text.formForgot}}</a>
+          </li>
+          <li class="spacer login register"></li>
+          <li class="login donthave">{{text.formDontHave}}</li>
+          <li id="register" class="login register">
+            <a href="#register" class="noicon">{{text.formRegister}}</a>
+            <a href="#close" class="register icon" rel="close"></a>
+          </li>
+          <li class="register">
+            <form method="post" name="register" id="register">
+              <div class="liner width"></div>
+              <input type="text" name="name" placeholder="{{text.formName}}" required="required" /><br>
+              <div class="liner width"></div>
+              <input type="email" name="username" placeholder="{{text.formEmail}}" required="required" /><br>
+              <div class="liner width"></div>
+              <input type="email" name="username2" placeholder="{{text.formConfirmEmail}}" required="required" /><br>
+              <div class="liner width"></div>
+              <input type="password" name="password" placeholder="{{text.formPassword}}" required="required" /><br>
+              <div class="liner width"></div>
+              <input type="password" name="password2" placeholder="{{text.formConfirmPassword}}" required="required" /><br>
+              <div class="liner width"></div>
+              <div class="short error"></div>
+              <div class="input-w-icon">
+                <div class="icon" rel="trueblue-line"></div>
+                <input type="submit" name="submit" value="{{text.formCreateAccount}}" submit-btn class="centered" />
+              </div>
+            </form>
+          </li>
+          <li id="forgot">
+            <a href="#login" class="noicon SP12">{{text.formReset}}</a>
+            <a href="#close" class="icon" rel="close"></a>
+          </li>
+          <li class="forgot">
+            <form method="post" name="reset" id="reset">
+              <div class="liner width"></div>
+              <input type="email" name="username" placeholder="{{text.formEmail}}" required="required" /><br>
+              <div class="liner width"></div>
+              <div class="short error"></div>
+              <div class="input-w-icon">
+                <div class="icon" rel="trueblue-line"></div>
+                <input type="submit" name="submit" value="{{text.formReset}}" submit-btn class="centered SP12" />
+              </div>
+            </form>
+          </li>

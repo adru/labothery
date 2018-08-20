@@ -1,0 +1,47 @@
+<a href back-button ng-if="customBackTitle" class="bar medium right shadow" ng-class="{'bottom10' : !groupId}">
+  <div class="icon" rel="left"></div>
+  {{customBackTitle}}
+</a>
+<div class="searchBar_wrapper" ng-show="groupId && galleries.length && galleries[0].group_search_flag == 1">
+  <input ng-model="query" class="searchBar" placeholder="{{text.productSearchPre}}...">
+  <div class="icon" rel="search"></div>
+</div>
+<div class="spinner" ng-if="!galleries">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<!--
+<div class="bar short resultcount" ng-if="query">
+  {{(filteredGallery.length)}}
+  <span ng-if="(filteredGallery.length) == 1">{{text.result}}</span>
+  <span ng-if="(filteredGallery.length) != 1">{{text.results}}</span>
+</div>
+-->
+<ul id="galleries" ng-if="galleries">
+  <li ng-repeat="gallery in galleries" class="wo_pic">
+    <a href="#/galleryGroup/{{::groupId}}/{{::gallery.id}}/" class="bar medium">
+      {{gallery.gallery_name | getTranslation:selectedLanguage}}
+      <div class="icon" rel="right"></div>
+    </a>
+    <div class="liner width"></div>
+    <div id="products" ng-show="query" class="grid_{{::gallery.grid_option}} link_{{::gallery.link_to_details}}">
+      <ul>
+        <li ng-if="query" ng-repeat="item in filteredGallery = (gallery.items | filter:search) | orderBy:['order_id','title']" class="w_pic">
+          <a href="#/galleryGroup/0/{{::item.id}}/" class="product_thumb" ng-if="gallery.layout_option == 'top'" title="{{item.title | getTranslation:selectedLanguage}}" ng-style="thumbBack(item, {{::gallery.grid_option}}, {{::gallery.link_to_details}});"><img ng-if="gallery.link_to_details == 0" ng-src="{{::item.src | get600px}}" /></a>
+          <a href="#/galleryGroup/0/{{::item.id}}/" class="product_name" ng-if="gallery.visible_title">{{item.title | getTranslation:selectedLanguage}}</a>
+          <a href="#/galleryGroup/0/{{::item.id}}/" class="product_thumb" ng-if="!gallery.layout_option || gallery.layout_option == 'split'" title="{{item.title | getTranslation:selectedLanguage}}" ng-style="thumbBack(item, {{::gallery.grid_option}}, {{::gallery.link_to_details}});"><img ng-if="gallery.link_to_details == 0" ng-src="{{::item.src | get600px}}" /></a>
+          <a href="#/galleryGroup/0/{{::item.id}}/" class="inner" ng-if="gallery.visible_desc" ng-bind-html="item.description | getTranslation:selectedLanguage | convertBR"></a>
+          <a href="#/galleryGroup/0/{{::item.id}}/" class="product_thumb" ng-if="gallery.layout_option == 'bottom'" title="{{item.title | getTranslation:selectedLanguage}}" ng-style="thumbBack(item, {{::gallery.grid_option}}, {{::gallery.link_to_details}});"><img ng-if="gallery.link_to_details == 0" ng-src="{{::item.src | get600px}}" /></a>
+        </li>
+        <div ng-show="query && !filteredGallery.length" class="noresults">
+          <p ng-if="!query" ng-bind-html="text.productsNone"></p>
+          <p ng-if="query" ng-bind-html="text.searchNo"></p>
+        </div>
+      </ul>
+    </div>
+  </li>
+</ul>
+<div ng-show="galleries && !galleries.length" class="noresults">
+  <p ng-if="!query" ng-bind-html="text.productsNone"></p>
+  <p ng-if="query" ng-bind-html="text.searchNo"></p>
+</div>

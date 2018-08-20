@@ -1,0 +1,32 @@
+<div class="wrapper" ng-class="userDetails && 'logged-in'">
+  <div ng-show="!userDetails" ng-click="popupForm('user');" class="bar shadow welcome" rel="user">
+    <span class="welcome_name">{{text.welcome}},</span><br>
+    <span class="welcome_points">{{text.welcomeNew1}} {{clientInfo.client_name}} {{text.welcomeNew2}}</span>
+    <div class="icon" rel="user"></div>
+  </div>
+  <a ng-click="showQR();" class="bar shadow welcome" ng-if="userDetails && userDetails.name">
+    <span class="welcome_name">{{text.welcome}}, {{userDetails.name}}!</span><br>
+    <span class="welcome_points">{{text.youHave}} {{userDetails.current_points}} {{(userDetails.current_points == 1) ? text.point : text.points}}</span>
+    <div class="icon" rel="rewards"></div>
+  </a>
+  <!-- <div class="reward_grid">
+    <div class="reward" ng-repeat="reward in rewards | orderBy:'-reward_points'" reward_id="{{::reward.id}}" ng-click="loadReward($event);">
+      <div class="left">
+        <h3>{{reward.reward_name | getTranslation:selectedLanguage}}</h3>
+        <span class="text">{{reward.reward_points}} {{text.points}}</span>
+      </div>
+      <div class="right" ng-style="getRewardPic(reward)" ng-class="(reward.reward_url) ? 'w_pic' : 'wo_pic'" ></div>
+      <div class="clear"></div>
+    </div>
+  </div> -->
+  <div class="progress_bar">
+    <div class="progress"></div>
+    <div class="icon" rel="rewards" ng-repeat="reward in rewards" reward_id="{{::reward.id}}" ng-style="getRewardPic(reward)" ng-class="(reward.reward_url) ? 'w_pic' : 'wo_pic'" ng-click="loadReward($event);">
+      <div class="line"></div>
+      <div class="claim_btn FRE14" ng-show="userDetails && (userDetails.current_points-cartRewardTotalPoints) >= reward.reward_points">{{text.rewardsClaim}}</div>
+    </div>
+  </div>
+  <div class="progress_bar">
+    <div ng-repeat="reward in rewards" class="point_bubble" ng-style="getRewardPer(reward);">{{reward.reward_points}} <span class="text">{{text.points}}</span></div>
+  </div>
+</div>

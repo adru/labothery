@@ -1,0 +1,37 @@
+        <li class="spacer" ng-if="filteredMenuShortcuts.length"></li>
+        
+        <li class="shortcuts" ng-show="filteredMenuShortcuts.length" ng-class="{ 'w_text' : shortcutTextCount(filteredMenuShortcuts) == filteredMenuShortcuts.length }" class="shortcuts col_{{(filteredMenuShortcuts.length >=3) ? filteredMenuShortcuts.length : 3}}">
+          <shortcut ng-repeat="short in filteredMenuShortcuts = (shortcuts | filter:shortcutPlacementFilter('menu')) | orderBy:['order_id']" cut="short"></shortcut>
+          <div class="clear"></div>
+        </li>
+                
+        <li class="spacer"></li>
+        
+        <li>
+          <a ng-click="shareApp()" class="share">
+            <div class="icon" rel="share"></div>
+            {{text.menuShareApp}}
+          </a>
+        </li>
+        
+        <li class="spacer" ng-if="regions && regions.length || languages.length"></li>
+        
+        <li name="region" ng-if="regions && regions.length > 1">
+          <select name="region" ng-model="selectedRegion" ng-init="(!selectedRegion) ? regions[0].id : selectedRegion" ng-change="changeRegion(selectedRegion)">
+            <option ng-repeat="regi in regions track by regi.id" value="{{::regi.id}}" ng-selected="selectedRegion == regi.id">{{regi.region_name | getTranslation:selectedLanguage}}</option>
+          </select>
+          <div class="liner width" ng-hide="!languages"></div>
+        </li>
+        
+        <li name="language" ng-if="languages && languages.length">
+          <select name="language" ng-model="selectedLanguage" ng-change="changeLanguage(selectedLanguage)">
+            <option value="ENG" selected="selected" ng-selected="selectedLanguage == 'ENG'">English</option>
+            <option ng-repeat="lang in languages" value="{{::lang.language_code}}" ng-selected="selectedLanguage == lang.language_code">{{::lang.language_name}}</option>
+          </select>
+        </li>
+        
+        <li class="spacer"></li>
+
+        <li class="version" ng-if="appVersion">
+          v{{::appVersion}}
+        </li>

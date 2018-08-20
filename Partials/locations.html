@@ -1,0 +1,54 @@
+<div class="bar medium right shadow refreshGPS" ng-hide="!locations.length" ng-if="clientInfo && clientInfo.gps_flag != 0" ng-click="refreshGPS();">
+  <div class="spinner" ng-if="!GPS">
+    <div class="dot1"></div>
+    <div class="dot2"></div>
+  </div>
+  <div class="icon" rel="gps" ng-if="GPS"></div>
+  {{text.locationRefresh}}
+</div>
+<div class="spinner" ng-if="!locations">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<div class="searchBar_wrapper" ng-show="locations.length">
+  <input ng-model="query" class="searchBar" placeholder="{{text.locationSearch}}">
+  <div class="icon" rel="search"></div>
+</div>
+<div class="bar short resultcount" ng-if="query">
+  {{(filteredLocations.length)}}
+  <span ng-if="(filteredLocations.length) == 1">{{text.result}}</span>
+  <span ng-if="(filteredLocations.length) != 1">{{text.results}}</span>
+</div>
+<article ng-if="locations.length" ng-repeat="location in filteredLocations = (locations | filter:search) | orderBy:['-status','distance']" location_id="{{::location.id}}">
+  <a href="#/locations/{{::location.id}}/" class="wrapper" ng-if="location">
+    <div class="inner">
+      <div class="header">
+        <div class="banner_container" ng-if="clientInfo && clientInfo.gps_flag != 0" >
+          <div class="banner" ng-if="GPS && GPS != 'not found'" rel="locations">
+            <div class="spinner" ng-if="!GPS">
+              <div class="dot1"></div>
+              <div class="dot2"></div>
+            </div>  
+            <div ng-if="GPS">
+              <div class="icon" rel="locations"></div>
+              <div class="distance">{{location.distance}}{{text.km}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="fleft onehalf">
+          <h4 ng-bind-html="location.location_name | getTranslation:selectedLanguage"></h4>
+          <h5>{{::location.location_address}}, <span ng-if="location.location_suite">{{::location.location_suite}}, </span>{{::location.location_postal}}</h5>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div class="short bar time" ng-class="checkTime(location)" ng-if="location">
+      <div class="icon" rel="right"></div>
+      {{location.status_}} {{location.status_until}}
+    </div>
+  </a>
+</article>
+<div ng-show="locations && !filteredLocations.length || locations && !locations.length" class="noresults">
+  <p ng-if="!query" ng-bind-html="text.locationNoneFound"></p>
+  <p ng-if="query" ng-bind-html="text.searchNo"></p>
+</div>

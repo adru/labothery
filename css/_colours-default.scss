@@ -1,0 +1,225 @@
+$approvedGreen: #008000;
+
+$liner: $main;
+$linerShadow: $black;
+
+$loadingDots: $main;
+$loadingDotsSubmit: $white;
+
+// FRAMEWORK
+$header: $black;
+$headerBKG: $white;
+$headerShadow: $black;
+$openMenu: $white;
+$openMenuBKG: $main;
+$headerScanDots: $black;
+$cartQuantity: $lightGrey;
+
+$ordersHeader: $white;
+$ordersHeaderBKG: $darkGrey;
+$orderComplete: $white;
+$orderCompleteBKG: $main;
+
+$menuBKG: $black;
+$menuShadow: $black;
+$menuLI: $white;
+$menuLISelected: $white;
+$menuLIActive: $white;
+$menuLIBKG: $darkGrey;
+$menuLISelectedBKG: $main;
+$menuLIActiveBKG: $main;
+
+$userPanelRight: $white;
+$userPanelRightBKG: $darkGrey;
+$userPanelNav: $black;
+$userPanelNavBKG: $white;
+$userPanelNavSelected: $white;
+$userPanelNavSelectedBKG: $main;
+$userPanelLiner: $main;
+$userPanelLinerShadow: $linerShadow;
+
+$shieldBKG: rgba($black, 0.75);
+
+$shortcut: $white;
+$shortcutBKG: rgba($black, 0.25);
+$shortcutBar: $main;
+
+$top10BKG: $white;
+$top10Details: $white;
+$top10DetailsBKG: $lightGrey;
+
+$selectedRegion: $main;
+$selectedRegionBorder: $black;
+$selectedRegionBKG: $black;
+
+$article: $black;
+$articleBKG: $white;
+
+$price: $white;
+$priceBKG: $main;
+$priceAddCart: $white;
+$priceAddCartBKG: $darkGrey;
+
+$bannerStartDate: $white;
+$bannerStartDateBKG: $main;
+
+$bannerNews: $white;
+$bannerNewsBKG: $alertRed;
+
+$bannerClose: $white;
+$bannerCloseBKG: $darkGrey;
+
+$bannerLocation: $white;
+$bannerLocationBKG: $darkGrey;
+
+$bannerUser: $white;
+$bannerUserBKG: $lightGrey;
+
+$bannerLeaderboard: $white;
+$bannerLeaderboardBKG: $main;
+
+$bannerFav: $white;
+$bannerFavBKG: $lightGrey;
+$bannerFavdBKG: $alertRed;
+
+$bannerDelete: $white;
+$bannerDeleteBKG: $darkGrey;
+
+$approved: $white;
+$approvedBKG: $approvedGreen;
+
+$denied: $white;
+$deniedBKG: $alertRed;
+
+$pending: $white;
+$pendingBKG: $lightGrey;
+
+$searchBar: $black;
+$searchBarBKG: $white;
+$searchIcon: $lightGrey;
+
+$bar: $white;
+$barBKG: $darkGrey;
+$barActive: $main;
+
+$noresults: $white;
+$noresultsIcon: $alertRed;
+
+$resultCount: $lightGrey;
+$resultCountBKG: $darkGrey;
+
+$starBase: $lightGrey;
+$starRating: $main;
+$ratingMyBorder: $main;
+
+// PAGES
+$newsLocation: $white;
+$newsLocationBKG: $black;
+$showMore: $white;
+$showMoreBKG: $main;
+
+$welcome: $white;
+$welcomeBKG: $main;
+
+$external: $white;
+$externalBKG: $lightGrey;
+$notificationBorder: $main;
+
+$top10Header: $white;
+$top10HeaderBKG: rgba($black,0.25);
+$top10HeaderIcon: $white;
+
+$productName: $white;
+$productNameBKG: $darkGrey;
+$innerLi: $black;
+$innerLiBKG: $white;
+
+$location: $black;
+$locationOpen: $white;
+$locationOpenBKG: $main;
+$locationClosed: $white;
+$locationClosedBKG: $lightGrey;
+
+$userIcon: $black;
+$userIconBKG: $white;
+$locationWrapper: $white;
+$rewardClaimBtn: $white;
+$rewardClaimBtnBKG: $main;
+$rewardLine: $white;
+$rewardLineShadow: $black;
+$rewardUserLine: $main;
+$pointMarker: $white;
+$rewardBarBKG: $black;
+$rewardBarProgress: $main;
+$rewardIcon: $black;
+$rewardIconBKG: rgba($white, 0.25);
+
+$myRankIcon: $userIcon;
+$myRankIconBKG: $userIconBKG;
+$leaderboardMe: $white;
+$leaderboardMeBKG: $main;
+$leaderboardEven: $lightGrey;
+$regionBtn: $white;
+$regionBtnSelected: $white;
+$regionBtnBKG: rgba($black, 0.25);
+$regionBtnSelectedBKG: $main;
+$regionSelect: $white;
+
+$delete: $white;
+$deleteBKG: $lightGrey;
+$notifOnBKG: $darkGrey;
+$notifOnIconBKG: $alertRed; // to turn off
+$notifOffBKG: $lightGrey;
+$notifOffIconBKG: $approvedGreen; // to turn on
+
+// FORMS
+$consoleIcon: $black;
+$consoleIconBKG: $white;
+
+$rewardCost: $white;
+$rewardCostBKG: $alertRed;
+
+$rewardClaim: $white;
+$rewardClaimBKG: $main;
+$rewardClaimToken: $black;
+$rewardClaimTokenBKG: $white;
+$rewardClaimClose: $white;
+$rewardClaimCloseBKG: $black;
+$rewardClaimedBKG: saturate($main, 25%);
+
+$facebook: $white;
+$facebookBKG: #4B5998;
+$consoleInput: $white;
+$consoleInputBKG: $black;
+$error: $white;
+$errorBKG: $alertRed;
+$ratingSubmit: $white;
+$ratingSubmitBKG: $main;
+$reviewTextarea: $black;
+
+$passportBKG: $darkGrey;
+
+$consoleLI: $white;
+$consoleLIBKG: transparent;
+$consoleLIBtn: $white;
+$consoleLIBtnBKG: $darkGrey;
+$consoleLIShort: $white;
+$consoleLIShortBKG: $lightGrey;
+$consoleSubmit: $white;
+$consoleSubmitBKG: $darkGrey;
+$consoleCancelBKG: $alertRed;
+
+$cartSubtitle: $lightGrey;
+$cartNoResults: $black;
+$variation: $black;
+$variationBKG: $white;
+$variationBorder: $darkGrey;
+$variationSelected: $white;
+$variationSelectedBKG: $main;
+$variationSelectedBorder: $white;
+$variationBtmBorder: $lightGrey;
+
+$qrClose: $white;
+$qrCloseBKG: $black;
+
+$offline: $white;

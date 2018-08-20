@@ -1,0 +1,29 @@
+<article ng-repeat="new in instagram | orderBy:['-show_date'] | limitTo:showLimit track by new.id" news_id="{{new.id}}" count-banners>
+  <div class="wrapper">
+    <div class="inner">
+      <div class="header pic-only">
+        <div class="banner_container">
+          <div class="banner" rel="start">
+            <div class="month">{{(new.show_date) ? (new.show_date *1000 | date:'MMM' | translateMonth:selectedLanguage) : ""}}</div>
+            <div class="date">{{::(new.show_date) ? (new.show_date *1000 | date:'dd') : ""}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img ng-if="new.image" ng-src="{{::new.image | get600px}}" />
+    <div ng-if="new.body" class="inner">
+      <p ng-bind-html="new.body | getTranslation:selectedLanguage | convertBR"></p>
+    </div>
+    <a ng-if="new.link" link="{{::new.link}}" ng-click="openSystem($event)" class="external">
+      {{new.link_text | getTranslation:selectedLanguage}}
+      <div class="icon" rel="right"></div>
+    </a>
+    <a ng-if="new.link" link="{{::new.link}}" ng-click="openSystem($event)" class="external_layer"></a>
+  </div>
+</article>
+<div class="spinner" ng-if="!instagram || !instagram.length">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<div class="show_more" ng-if="showLimit < instagram.length" ng-click="showMore();">{{text.showMore}}</div>
+<div class="clear"></div>

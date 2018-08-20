@@ -1,0 +1,60 @@
+<div class="spinner" ng-if="!location">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+
+<a href back-button ng-if="location != 'null' && clientInfo.location_count > 1" class="bar medium right shadow">
+  <div class="icon" rel="left"></div>
+  {{text.menuLocations}}
+</a>
+
+<article ng-if="location && location != 'null'" location_id="{{::location.id}}">
+  <div class="wrapper">
+    <div class="logo" ng-if="location.location_logo" style="background-color: {{::location.location_logo_hex}}">
+      <div class="inner_logo" ng-style="getLogo(location)"></div>
+    </div>
+    <div class="inner">
+      <a address="{{::location.location_address + ' ' + location.location_city + ' ' + location.location_province + ' ' + location.location_country | encodeURIComponent}}" class="header" address-href>
+        <div class="banner_container">
+          <div class="banner" ng-if="GPS && GPS != 'not found'" rel="locations">
+            <div class="icon" rel="locations"></div>
+            <div class="distance">{{location.distance}}{{text.km}}</div>
+          </div>
+        </div>
+        <div class="fleft onehalf">
+          <h4 ng-bind-html="location.location_name | getTranslation:selectedLanguage"></h4>
+          <h5>{{::location.location_address}}, <span ng-if="location.location_suite">{{::location.location_suite}}, </span>{{::location.location_postal}}</h5>
+        </div>
+        <div class="clear"></div>
+      </a>
+    </div>
+    <div class="short bar time" ng-class="checkTime(location)" ng-if="location">
+      {{location.status_}} {{location.status_until}}
+    </div>
+    <div class="inner hours" ng-if="location.hours_days">
+      <div class="fleft" ng-bind-html="location.hours_days | getTranslation:selectedLanguage | convertBR"></div>
+      <div class="fright" ng-bind-html="location.hours_times | getTranslation:selectedLanguage | convertBR"></div>
+      <div class="clear"></div>
+    </div>
+  </div>
+</article>
+
+<div ng-if="location" ng-show="filteredShortcutsTop.length" ng-class="{ 'w_text' : shortcutTextCount(filteredShortcutsTop) == filteredShortcutsTop.length }" class="shortcuts col_{{(filteredShortcutsTop.length >=3) ? filteredShortcutsTop.length : 3}}">
+  <shortcut ng-repeat="short in filteredShortcutsTop = (shortcuts | filter:shortcutPlacementFilter('location_top')) | orderBy:['order_id']" cut="short" loc="location"></shortcut>
+  <div class="clear"></div>
+</div>
+
+<div ng-if="location" ng-show="filteredShortcutsBtm.length" ng-class="{ 'w_text' : shortcutTextCount(filteredShortcutsBtm) == filteredShortcutsBtm.length }" class="shortcuts col_{{(filteredShortcutsBtm.length >=4) ? filteredShortcutsBtm.length : 4}}">
+  <shortcut ng-repeat="short in filteredShortcutsBtm = (shortcuts | filter:shortcutPlacementFilter('location_btm')) | orderBy:['order_id']" cut="short" loc="location"></shortcut>
+  <div class="clear"></div>
+</div>
+
+<article ng-if="location && location != 'null'">
+  <div class="wrapper">
+    <img ng-if="location.location_image" ng-src="{{::location.location_image | get600px}}" />
+  </div>
+</article>
+
+<div ng-if="location && location == 'null'" class="noresults">
+  <p ng-bind-html="text.locationInvalid"></p>
+</div>

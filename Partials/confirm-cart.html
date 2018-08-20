@@ -1,0 +1,93 @@
+          <article class="cart">
+            <form method="post" name="confirmcart" id="confirmcart" class="wrapper">
+              <a href class="bar medium right shadow" ng-click="backToCart();">
+                <div class="icon" rel="left"></div>
+                {{text.yourCart}}
+              </a>
+              <div class="inner">
+                <div class="header">
+                  <h4>{{::(clientInfo.stripe_flag == 1) ? text.orderDetails : text.finalizeOrder}}</h4>
+                </div>
+                <section class="variable location">
+                  <span class="subtitle">{{text.custom.pickupLocation || text.pickupLocation}}</span>
+                  <div class="clear"></div>
+                  <div class="select_wrapper" ng-class="{'single' : clientInfo.cart_locations.length == 1}">
+                    <select name="variable" ng-model="selectedLoc" ng-change="updateAddressA(selectedLoc.id);" ng-options="cl as (cl.location_name | getTranslation:selectedLanguage) for cl in clientInfo.cart_locations track by cl.id">
+                    </select>
+                  </div>
+                  <a address="" class="loc_btn" address-href>
+                    <div class="icon" rel="locations"></div>
+                  </a>
+                  <div class="clear"></div>
+                </section>
+
+                <section class="variable" ng-if="underMinimum && underMinimum > 0">
+                  <span class="note center">
+                    {{text.minimumOrder}} {{locationMinimum | currency : "$" : 2 }}<br>{{text.minimumDifference}} {{underMinimum | currency : "$" : 2 }}
+                  </span>
+                </section>
+                <section class="variable" ng-if="overMaximum && overMaximum > 0">
+                  <span class="note center">
+                  {{text.maximumOrder}} {{locationMaximum | currency : "$" : 2 }}<br>{{text.maximumDifference}} {{overMaximum | currency : "$" : 2 }}
+                  </span>
+                </section>
+
+                <section class="variable" ng-if="allowSelect && allowASAP" ng-show="goodOrder">
+                    <button class="variation btn" ng-click="pickUpAsap($event)" ng-class="{'selected': !later}">Pick Up ASAP</button>
+                    <button class="variation btn" ng-click="pickUpLater($event)" ng-class="{'selected': later}">Pick Up Later</button>
+                </section>
+
+                <section class="variable" ng-show="later && goodOrder">
+                  <span class="subtitle pick-up-title">{{text.order_pickuptime}}</span>
+                  <div class="clear"></div>
+                  <div class="select_wrapper pick-up-date">
+                    <select name="variable" ng-model="theDate" ng-change="updateHours()">
+                      <option value="{{date.date}}" ng-repeat="date in dateAvailable">{{date.date}}</option>
+                    </select>
+                  </div>
+                  <br>
+                  <div class="select_wrapper">
+                    <select name="variable" ng-model="timeSelected" ng-change="alertPickUptime()" ng-options="time.text for time in selectedDate.timeSlots track by time.value" ng-init="timeSelected=selectedDate.timeSlots[0]">
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                  <span class="note">{{text.custom.formPickupNote}}</span>
+                  <div class="clear"></div>
+                </section>
+
+                <section class="variable" ng-show="!userDetails && goodOrder" ng-if="allowOrder == 'open'">
+                  <span class="subtitle">{{text.formName}}</span>
+                  <div class="clear"></div>
+                  <input type="text" id="name" name="name" ng-value="(userDetails) ? userDetails.name : (cart.name) ? cart.name : ''" required="required" />
+                </section>
+                <section class="variable" ng-if="allowOrder == 'open'" ng-show="goodOrder">
+                  <span class="subtitle">{{text.formPhoneNumber}}</span>
+                  <div class="clear"></div>
+                  <input type="tel" id="phone" name="phone" ng-value="(cart.phone) ? cart.phone : ''" required="required" />
+                  <div class="clear"></div>
+                  <span class="note">{{text.custom.formPhoneNote}}</span>
+                  <div class="clear"></div>
+                </section>
+                <section class="variable" ng-show="goodOrder && (!userDetails || !userDetails.username)" ng-if="allowOrder == 'open'">
+                  <span class="subtitle">{{text.formEmail}}</span>
+                  <span class="optional">{{text.cartOptional}}</span>
+                  <div class="clear"></div>
+                  <input type="email" id="email" name="email" ng-value="(userDetails && userDetails.username) ? userDetails.username : (cart.email) ? cart.email : ''" />
+                </section>
+                <section class="variable" ng-if="allowOrder == 'open'" ng-show="goodOrder">
+                  <span class="subtitle">{{text.custom.formNotes || text.formNotes}}</span>
+                  <span class="optional">{{text.cartOptional}}</span>
+                  <div class="clear"></div>
+                  <textarea name="notes">{{(cart.notes) ? cart.notes : ''}}</textarea>
+                </section>
+                <section class="variable note" ng-if="allowOrder != 'open'" ng-show="goodOrder">
+                  <p ng-if="allowOrder == 'closed'">{{text.orderClosed}}</p>
+                  <p ng-if="allowOrder == 'closing'">{{text.orderClosing}}</p>
+                </section>
+                <div class="short error"></div>
+              </div>
+              <input type="submit" name="submit" value="{{text.enterPaymentDetails}}" submit-btn class="centered" ng-click="submitCart('payment')" ng-if="allowOrder == 'open' && clientInfo.stripe_flag == 1" ng-show="goodOrder" />
+              <input type="submit" name="submit" value="{{text.submitCart}}" submit-btn class="centered" ng-click="submitCart()" ng-if="allowOrder == 'open' && clientInfo.stripe_flag != 1" ng-show="goodOrder" />
+            </form>
+            <div class="clear"></div>
+          </article>

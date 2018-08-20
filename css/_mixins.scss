@@ -1,0 +1,86 @@
+@function vmin ($value) {
+  @return #{($value/1px)/3.2}vmin;
+}
+
+$main-font-size: 16px;
+
+@mixin x-rem ($property, $value, $value2: null) {
+  @if $value2 {
+    #{$property}: ($value * $main-font-size) ($value2 * $main-font-size);
+    #{$property}: #{$value}rem #{$value2}rem;
+  } @else {
+    #{$property}: $value * $main-font-size;
+    #{$property}: #{$value}rem;
+  }
+}
+
+$default-prefixes: webkit moz ms o;
+
+@mixin build-prefix-values($property, $value, $prefixes: $default-prefixes) {
+  #{$property}: #{$value};
+  @each $prefix in $prefixes {
+    -#{$prefix}-#{$property}: #{$value};
+  }
+}
+
+@mixin calc($property, $value, $prefixes: $default-prefixes) {
+  #{$property}: calc(#{$value});
+  @each $prefix in $prefixes {
+    #{$property}: -#{$prefix}-calc(#{$value});
+  }
+}
+
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+
+/*** http://stackoverflow.com/questions/17181849/placeholder-mixin-scss-css ***/
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+@mixin placeholder {
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+    @content;
+  }
+}
+/*** ***/
+
+@mixin display-inline-block($impt: null) {
+  @if $impt {
+    display: inline-block !important;
+  } @else {
+    display: inline-block;
+  }
+  zoom: 1;
+  *display: inline !important;
+}
+
+@mixin border-box() {
+  @include build-prefix-values(box-sizing, border-box);
+}

@@ -1,0 +1,22 @@
+<script type="text/ng-template" id="ticket.html">
+  <div class="wrapper">
+    <div class="inner">
+      <h6>{{ticket.data.category_name}}</h6>
+      <h4>{{ticket.data.product_name}}</h4>
+      <h6 class="variation_name">{{ticket.variation.variation_name}} <strong>x{{ticket.product.quantity}}</strong></h6>
+    </div>
+    <a class="bar short receipt ng-binding" href="#/orders/{{ticket.order_id}}/t/">
+      View Receipt
+      <div class="icon" rel="right"></div>
+    </a>
+  </div>
+</script>
+
+<div class="spinner" ng-if="!myTickets">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<article ng-repeat="(key, ticket) in myTickets | orderBy:['-created'] track by key" ng-if="myTickets" ng-include="'ticket.html'"></article>
+<div ng-if="myTickets && !myTickets.length" class="noresults">
+  <p ng-bind-html="text.myTicketsNone"></p>
+</div>

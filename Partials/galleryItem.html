@@ -1,0 +1,24 @@
+<a href back-button ng-if="galleryId" class="bar medium right shadow">
+  <div class="icon" rel="left"></div>
+  <span ng-bind-html="gallery.gallery_name | getTranslation:selectedLanguage"></span>
+</a>
+<div class="spinner" ng-if="!item">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<article ng-if="item" product_id="{{::item.id}}">
+  <div class="wrapper">
+    <div class="inner">
+      <div class="header">
+        <div class="fleft one">
+          <h4>{{item.title | getTranslation:selectedLanguage}}</h4>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <img ng-if="item.image" ng-src="{{::item.image | get600px}}" />
+    <div class="inner" ng-if="item.description">
+      <p ng-bind-html="item.description | getTranslation:selectedLanguage | convertBR"></p>
+    </div>
+  </div>
+</article>

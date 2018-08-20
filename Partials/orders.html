@@ -1,0 +1,61 @@
+<script type="text/ng-template" id="order_history.html">
+  <div class="wrapper">
+    <div class="inner">
+      <div class="header scan">
+        <div class="banner_container">
+          <div class="banner" rel="start" ng-if="event.created">
+            <div class="month">{{(event.created) ? (event.created *1000 | date:'MMM' | translateMonth:selectedLanguage) : ""}}</div>
+            <div class="date">{{::(event.created) ? (event.created *1000 | date:'dd') : ""}}</div>
+          </div>
+        </div>
+        <div class="fleft one">
+          <h4 ng-bind-html="orderStatusStatusText(event);"></h4>
+          <h5 ng-if="event.total_value">
+            {{:: event.total_value | currency : "$" : 2 }}
+          </h5>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <a class="bar short receipt" href="#/orders/{{::event.id}}/o/">
+      {{text.orderViewReceipt}}
+      <div class="icon" rel="right"></div>
+    </a>
+  </div>
+</script>
+<div class="spinner" ng-if="!orderReceipts">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<div class="receipt_container" ng-if="orderReceipts && Object.keys(orderReceipts).length" ng-repeat="item in orderReceipts track by item.id">
+  <a address="{{::item.location_address + ' ' + item.location_city + ' ' + item.location_province + ' ' + item.location_country | encodeURIComponent}}"  class="location_bar" ng-if="item.location_id" address-href>
+    {{item.location_name | getTranslation:selectedLanguage}}
+    <div class="icon" rel="locations"></div>
+  </a>
+  <div class="receipt" ng-bind-html="item.receipt | to_trusted" ng-click="expandReceipt($event);"></div>
+  <div class="order_status {{item.status}}" ng-bind-html="orderStatusText(item);"></div>
+
+  <div class="complete suggest-time-container" ng-if="item.status == 'reschedule'">
+    Your order has been suggested to be rescheduled.
+    <br>
+    Suggested Pick Up Time:  {{ item.estimate * 1000 | date: 'MMM d, y h:mm a'}}
+    <!-- {{text.order_rescheduled}}
+    {{text.order_suggest_pickup_time}} : {{item.suggested_time | date: 'mediumDate'}} -->
+    <!-- <div class="icon" rel="check" ng-click="acceptReschedule($event, item.id)"></div>
+    <div class="icon" rel="close" ng-click="declineReschedule($event, item.id)"></div> -->
+    <br>
+    <div class="button" rel="check" ng-click="acceptReschedule($event, item.id)">Accept</div>
+    <div class="decline-button" rel="close" ng-click="declineReschedule($event, item.id)">Decline</div>
+  </div>
+
+  <div class="complete" ng-if="item.status == 'processing' || item.status == 'ready'" ng-click="orderPickedUp($event, item.id);">
+    {{(clientInfo.order_get_points_flag && userDetails) ? text.order_picked_up_claim : text.order_picked_up}}
+    <div class="icon" rel="check"></div>
+  </div>
+</div>
+<div ng-if="orderReceipts && !activeOrders" class="noresults">
+  <p ng-bind-html="text.ordersNone"></p>
+  <a href="#/products/" ng-bind-html="text.custom.checkoutmenu"></a>
+</div>
+<hr ng-if="completedOrderReceipts && Object.keys(completedOrderReceipts).length">
+<article ng-if="completedOrderReceipts && Object.keys(completedOrderReceipts).length" ng-repeat="(key, event) in completedOrderReceipts track by key" ng-include="'order_history.html'" class="history"></article>

@@ -1,0 +1,18 @@
+<a href back-button class="bar medium right shadow">
+  <div class="icon" rel="left"></div>
+  <span ng-bind-html="getBackTitle()"></span>
+</a>
+<div class="spinner" ng-if="!order">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<div class="receipt_container" ng-if="order">
+  <div class="complete" ng-click="reOrder();" ng-if="!added">{{text.addToCart}}</div>
+  <div class="complete added" ng-if="added">{{text.addedToCart}}</div>
+  <div class="complete" ng-if="clientInfo.order_get_points_flag && userDetails && !order.history[0].points" ng-click="orderPickedUp();">
+    {{text.order_claim}}
+  </div>
+  <div class="receipt" ng-bind-html="order.receipt | to_trusted" ng-click="expandReceipt($event);"></div>
+  <div class="order_status" ng-if="order.history[0].status == 'complete'">{{text.custom.orderPickedUpOn || text.orderPickedUpOn}}<br>{{order.history[0].created * 1000 | date: 'MMM d, y h:mm a'}}</div>
+  <div class="order_status" ng-if="order.history[0].status == 'cancelled'">{{text.orderCancelledOn}}<br>{{order.history[0].created * 1000 | date: 'MMM d, y h:mm a'}}</div>
+</div>

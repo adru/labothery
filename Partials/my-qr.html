@@ -1,0 +1,18 @@
+          <div class="spinner" ng-if="!apiKey">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+          </div>
+          <article class="qr">
+            <div class="wrapper">
+              <div class="inner">
+                <div class="header">
+                  <h4>{{text.myQR}}</h4>
+                </div>
+                <div class="qr_code"></div>
+                <div class="note">{{text.myQRnotes}}</div>
+              </div>
+            </div>
+            <div class="close" ng-click="closePopup();">
+              {{text.close}}
+            </div>
+          </article>

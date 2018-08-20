@@ -1,0 +1,26 @@
+        <li ng-if="!userDetails">
+          <div class="btn FRE12 SP12" ng-click="showLogin()">
+            <div class="icon" rel="trueblue-line"></div>
+            {{text.menuLoginRegister}}
+          </div>
+        </li>
+        <div class="userPanel" ng-if="userDetails">
+          <div class="icon" rel="user" ng-style="profilePic(userDetails)" ng-class="(userDetails.image && userDetails.image != '') ? 'w_pic' : 'wo_pic'"></div>
+          <div class="right">
+            <div class="points">
+              <span class="number">{{userDetails.current_points}}</span>
+              <span ng-if="userDetails.current_points == 1">{{text.point}}</span>
+              <span ng-if="userDetails.current_points != 1">{{text.points}}</span>
+            </div>
+            <nav id="user-menu">
+              <a href="#/favourites/" ng-class="currentParent == 'favourites' ? 'selected' : ''" class="icon" rel="heart" ng-click="closeMenu($event)"></a>
+              <a href="#/reviews/" ng-class="currentParent == 'reviews' ? 'selected' : ''" class="icon" rel="star" ng-click="closeMenu($event)" ng-if="clientInfo && clientInfo.review_flag == 1"></a>
+              <a href="#/history/" ng-class="currentParent == 'history' ? 'selected' : ''" class="icon" rel="history" ng-click="closeMenu($event)"></a>
+              <a href="#/settings/" ng-class="currentParent == 'settings' ? 'selected' : ''" class="icon" rel="settings" ng-click="closeMenu($event)"></a>
+              <a ng-if="clientInfo && clientInfo.review_flag != 1" class="empty icon"></a>
+            </nav>
+          </div>
+          <div class="clear"></div>
+        </div>
+
+        <li class="spacer"></li>

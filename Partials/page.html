@@ -1,0 +1,6 @@
+<style parse-style ng-if="page.css">{{::page.css}}</style>
+<div class="spinner" ng-if="!page">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<article class="page" ng-if="page.content" ng-bind-html="page.content | getTranslation:selectedLanguage | convertBR"></article>

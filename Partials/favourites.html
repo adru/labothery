@@ -1,0 +1,25 @@
+<div class="spinner" ng-if="!favourites">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<div id="products" ng-show="favourites">
+  <ul>
+    <li ng-repeat="favourite in favouritesWpic" class="w_pic">
+      <div class="product_name">{{favourite.product_name | getTranslation:selectedLanguage}}</div>
+      <a href="#/products/f/{{::favourite.product_id}}/" class="product_thumb" title="{{::favourite.product_name}}" ng-style="thumbBack(favourite)">
+        <div class="icon" rel="heart"></div>
+      </a>
+    </li>
+    <li ng-repeat="favourite in favouritesWOpic" class="wo_pic">
+      <a href="#/products/f/{{::favourite.product_id}}/" class="bar medium" title="{{::favourite.product_name}}">
+        {{favourite.product_name | getTranslation:selectedLanguage}}
+        <div class="icon" rel="heart"></div>
+        <div class="icon" rel="right"></div>
+      </a>
+      <div class="liner width"></div>
+    </li>
+    <div ng-if="favourites && !favourites.length" class="noresults">
+      <p ng-bind-html="text.favouritesNone"></p>
+    </div>
+  </ul>
+</div>

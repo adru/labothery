@@ -1,0 +1,57 @@
+<div class="spinner" ng-if="!ratings">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<article class="rating" ng-if="ratings" ng-repeat="rating in ratings" product_id="{{::rating.product_id}}">
+  <div class="wrapper">
+    <a href="#/products/r/{{::rating.product_id}}/" class="bar short">
+      {{rating.product_name | getTranslation:selectedLanguage}}
+      <div class="icon" rel="right"></div>
+    </a>
+    <div class="inner">
+      <div class="header">
+        <div class="banner_container">
+          <!-- delete? -->
+          <div class="banner" rel="close" ng-click="deleteReview($event);">
+            <div class="icon" rel="close"></div>
+          </div>
+          <div class="banner" rel="start" ng-if="rating.created">
+            <div class="month">{{(rating.created) ? (rating.created *1000 | date:'MMM' | translateMonth:selectedLanguage) : ""}}</div>
+            <div class="date">{{::(rating.created) ? (rating.created *1000 | date:'dd') : ""}}</div>
+          </div>
+          <!-- approved? -->
+          <div class="banner" ng-class="getRatingStatus(rating.approved_flag)" rel="status">
+            <div class="icon"></div>
+          </div>
+        </div>
+        <div class="fleft three">
+          <div class="rating" rating="{{::rating.rating_value}}">
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="base">
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div class="inner">
+      <p>
+        {{::rating.rating_comment}}
+      </p>
+    </div>
+  </div>
+</article>
+
+<div ng-if="ratings && !ratings.length" class="noresults">
+  <p ng-bind-html="text.reviewNone"></p>
+  <div class="icon" rel="rating"></div>
+</div>

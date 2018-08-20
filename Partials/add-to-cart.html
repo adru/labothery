@@ -1,0 +1,84 @@
+          <article class="cart">
+            <form method="post" name="addtocart" id="addtocart" class="wrapper">
+              <a href ng-if="editProduct" class="bar medium right shadow" ng-click="backToCart();">
+                <div class="icon" rel="left"></div>
+                {{text.yourCart}}
+              </a>
+              <div class="inner">
+                <div class="header">
+                  <h4>{{product.product_name | getTranslation:selectedLanguage}}</h4>
+                </div>
+                <section class="variation" ng-show="product.variations.length > 1">
+                  <span class="subtitle">{{text.cartOptions}}</span>
+                  <div class="clear"></div>
+                  <div class="variation btn" ng-repeat="tp in product.variations | filter: filterVariations | orderBy:['order_id']" ng-class="{'selected': (editProduct) ? tp.id == editProduct.variation : $first}" v_id="{{tp.id}}" v="{{::tp.value}}" ng-click="selectVariation(tp.id); evaluateTotal();">
+                    {{tp.variation_name | getTranslation:selectedLanguage}}
+                    <div class="fright">{{::tp.value | currency : "$" : 2 }}</div>
+                    <div class="clear"></div>
+                  </div>
+                </section>
+                <section class="variable">
+                  <span class="subtitle">{{text.cartQuantity}}</span>
+                  <div class="quantity fright">
+                    <div class="icon minus" rel="subtract"></div>
+                    <div class="amount">{{quantity}}</div>
+                    <div class="icon plus" rel="plus"></div>
+                  </div>
+                  <div class="clear"></div>
+                </section>
+                <section class="variable" ng-if="product.variables.length" ng-repeat="tpv in product.variables | orderBy:['order_id']" set_id="{{::tpv.set_id}}" required="{{::tpv.required_flag}}" limit="{{::tpv.select_limit}}">
+                  <span class="subtitle">{{tpv.set_name | getTranslation:selectedLanguage}}</span>
+                  <span class="optional" ng-if="tpv.select_limit && tpv.select_limit != 1">{{::tpv.select_limit == 0 ? text.cartNoMax : text.cartMax }} {{::(tpv.select_limit > 1) ? tpv.select_limit : ''}}</span>
+                  <span class="optional" ng-if="!tpv.required_flag">{{text.cartOptional}}{{::tpv.select_limit && tpv.select_limit != 1 ? ', ' : ''}}</span>
+                  <div class="clear" ng-if="!tpv.required_flag || tpv.items.length != 1"></div>
+                  <!-- if select_limit == 1, dropdown? -->
+                  <div class="select_wrapper" ng-if="tpv.select_limit == 1" ng-class="{'single' : tpv.items.length == 1}">
+<!--
+                    <select name="variable" ng-model="var" ng-init="var = tpv.items[0].id" ng-change="evaluateTotal();">
+                      <option value="{{::tpvi.id}}" v="{{::tpvi.value}}" t="{{::tpvi.type}}" ng-repeat="tpvi in tpv.items" ng-selected="editProduct && editProduct.variable[tpv.set_id] == tpvi.id">{{tpvi.item_name | getTranslation:selectedLanguage}}{{::tpvi | buildValue : tpvi.value : tpvi.type }}</option>
+                    </select>
+-->
+                    <select name="variable" ng-model="tpv.selected" ng-change="evaluateTotal();" ng-options="tpvi as ((tpvi.item_name | getTranslation:selectedLanguage)+(tpvi | buildValue : tpvi.value : tpvi.type)) for tpvi in tpv.items track by tpvi.id">
+                    </select>
+                  </div>
+                  <div class="clear" ng-if="tpv.items.length == 1"></div>
+                  <!-- if select_limit > 1, checkboxes? -->
+                  <div class="add_here" ng-if="tpv.select_limit != 1">
+                    <div class="dyn select_wrapper" style="display: none;" ng-class="{'single' : tpv.items.length == 1}">
+<!--
+                      <select name="variable" ng-model="var" ng-init="var = tpv.items[0].id" set_id="{{::tpv.set_id}}">
+                        <option value="{{::tpvi.id}}" v="{{::tpvi.value}}" t="{{::tpvi.type}}" ng-repeat="tpvi in tpv.items" ng-selected="editProduct && editProduct.variable[tpv.set_id] == tpvi.id">{{tpvi.item_name | getTranslation:selectedLanguage}}{{::tpvi | buildValue : tpvi.value : tpvi.type }}</option>
+                      </select>
+-->
+                      <select name="variable" ng-model="tpv.selected" ng-change="evaluateTotal();" ng-options="tpvi as ((tpvi.item_name | getTranslation:selectedLanguage)+(tpvi | buildValue : tpvi.value : tpvi.type)) for tpvi in tpv.items track by tpvi.id">
+                      </select>
+                      <div class="icon" rel="close"></div>
+                    </div>
+                    <div class="dyn select_wrapper" ng-if="editProduct" ng-repeat="tpvs in cartProductVariables[tpv.set_id] track by $index" ng-class="{'single' : tpv.items.length == 1}">
+<!--
+                      <select name="variable" ng-model="var" ng-init="var = tpv.items[0].id" set_id="{{::tpv.set_id}}">
+                        <option value="{{::tpvi.id}}" v="{{::tpvi.value}}" t="{{::tpvi.type}}" ng-repeat="tpvi in tpv.items" ng-selected="editProduct && tpvs == tpvi.id">{{tpvi.item_name | getTranslation:selectedLanguage}}{{::tpvi | buildValue : tpvi.value : tpvi.type }}</option>
+                      </select>
+-->
+                      <select name="variable" ng-model="tpvs.selected" ng-change="evaluateTotal();" ng-options="tpvi as ((tpvi.item_name | getTranslation:selectedLanguage)+(tpvi | buildValue : tpvi.value : tpvi.type)) for tpvi in tpv.items track by tpvi.id">
+                      </select>
+                      <div class="icon" rel="close"></div>
+                    </div>
+                  </div>
+                  <div class="add_variable_item short bar" ng-click="addVariableItem($event, tpv.select_limit);" ng-if="tpv.select_limit != 1">{{text.cartAddOption}}</div>
+                </section>
+                <section class="subtotal">
+                  <span class="subtitle">{{text.cartSubtotal}}</span>
+                  <div class="total fright">{{ subtotal | currency : "$" : 2 }}</div>
+                  <div class="clear"></div>
+                </section>
+                <div class="short error"></div>
+              </div>
+              <input type="submit" name="submit" value="{{text.updateCart}}" submit-btn class="centered" ng-if="editProduct" ng-click="updateCart()" />
+              <input type="submit" name="submit" value="{{text.addToCart}}" submit-btn class="centered" ng-hide="editProduct" ng-click="addToCart()" />
+            </form>
+            <br>
+            <input type="submit" name="submit" value="{{text.removeCart}}" submit-btn class="centered cancel" ng-if="editProduct" ng-click="removeCart()" />
+            <input type="submit" name="submit" value="{{text.cancel}}" submit-btn class="centered cancel" ng-if="!editProduct" ng-click="close()" />
+            <div class="clear"></div>
+          </article>

@@ -1,0 +1,73 @@
+// GLOBAL
+input, textarea, select {
+  font-family: $mainFont;
+}
+
+// FRAMEWORK
+html, body {
+  font-family: $mainFont;
+}
+nav#header {
+  #scan, #login, #cart, #qr {
+    font-family: $headerFont;
+  }
+}
+nav#menu {
+  ul {
+    li {
+      a, .btn {
+        font-family: $headerFont;
+        font-weight: 300;
+        letter-spacing: 1px;
+      }
+    }
+  }
+  select {
+    font-family: $headerFont;
+  }
+}
+.shortcuts {
+  > a {
+    span {
+      font-family: $headerFont;
+    }
+  }
+}
+
+// PAGES
+.rewards {
+  .content {
+    .icon {
+      &[rel="rewards"] {
+        .claim_btn {
+          font-family: $mainFont;
+        }
+      }
+    }
+    .point_bubble {
+      font-family: $mainFont;
+    }
+  }
+}
+
+// FORMS
+section#forms {
+  div#login {
+    font-family: $headerFont;
+  }
+  &.confirm_cart {
+    textarea[name="notes"] {
+      font-family: $mainFont;
+    }
+  }
+}
+#console {
+  a {
+    font-family: $headerFont;
+  }
+  input {
+    &[type="submit"] {
+      font-family: $headerFont;
+    }
+  }
+}

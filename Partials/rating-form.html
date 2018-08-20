@@ -1,0 +1,32 @@
+          <!-- RATINGS -->
+          <div class="spinner" rel="ratings">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+          </div>
+          <article class="rating">
+            <form method="post" name="rating" id="rating" class="wrapper">
+              <div class="inner">
+                <div class="header">
+                  <div class="fleft">
+                    <div class="rating">
+                      <div class="icon" rel="star"></div>
+                      <div class="icon" rel="star"></div>
+                      <div class="icon" rel="star"></div>
+                      <div class="icon" rel="star"></div>
+                      <div class="icon" rel="star"></div>
+                    </div>
+                    <input type="hidden" name="rating_value" />
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <textarea name="rating_comment" placeholder="{{text.reviewPrompt}}"></textarea>
+                <div class="short error"></div>
+              </div>
+              <input type="submit" name="submit" value="{{text.reviewSubmit}}" submit-btn class="centered" />
+            </form>
+            <div class="already noresults">
+              <p>
+                {{text.reviewAlready}}
+              </p>
+            </div>
+          </article>

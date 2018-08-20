@@ -1,0 +1,19 @@
+          <div class="spinner" ng-if="!userDetails">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+          </div>
+          <article class="user-forms-username">
+            <div class="wrapper">
+              <div class="inner">
+                <div class="header">
+                  <h4>{{(userDetails.username) ? text.formChange : text.formAdd}} {{text.formEmail}}</h4>
+                </div>
+              </div>
+            </div>
+            <form method="post" name="username" id="user-form-username">
+              <input type="email" original_value="{{userDetails.username}}" placeholder="{{text.formNewEmail}}" class="medium" name="username" required />
+              <input type="email" placeholder="{{text.formConfirmNewEmail}}" class="medium" name="username2" required />
+              <div class="short error"></div>
+              <input type="submit" name="submit" submit-btn value="{{(userDetails.username) ? text.formUpdate : text.formAdd}}" class="centered" />
+            </form>
+          </article>

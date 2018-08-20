@@ -1,0 +1,95 @@
+<div class="select_wrapper regions" ng-if="regions && regions.length">
+  <select name="region" class="selectedRegion notice" dir="rtl" ng-model="selectedRegion" ng-change="changeRegion(selectedRegion); changeTop10Region();">
+    <option ng-repeat="regi in regions track by regi.id" value="{{::regi.id}}" ng-selected="selectedRegion == regi.id">{{regi.region_name | getTranslation:selectedLanguage}}</option>
+  </select>
+</div>
+
+<div class="spinner" ng-if="!product">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+
+<div class="wrapper" ng-if="product && product != 'null'">
+  <div id="header">
+    <a href="#/top10/{{::prev}}/{{::(selectedRegionA) ? selectedRegionA : (categoryId) ? 'null' : ''}}{{::categoryId ? '/'+categoryId+'/' : ''}}" class="icon fleft" rel="left" ng-if="length > 1" ng-click></a>
+    <span>{{::product.rank}}</span>
+    <a href="#/top10/{{::next}}/{{::(selectedRegionA) ? selectedRegionA : (categoryId) ? 'null' : ''}}{{::categoryId ? '/'+categoryId+'/' : ''}}" class="icon fright" rel="right" ng-if="length > 1" ng-click></a>
+  </div>
+  <div class="product_name">{{product.product_name | getTranslation:selectedLanguage}}</div>
+  <img ng-src="{{::product.image}}" ng-if="product.image" />
+  <div class="shortcuts col_4 combo_34 w_text">
+    <a>
+      <div>
+        <div class="icon" rel="heart"></div>
+        <span>{{::product.fav_count}}</span>
+      </div>
+    </a><a>
+      <div>
+        <div class="icon" rel="star"></div>
+        <span>{{::product.rate_count}}</span>
+      </div>
+    </a><div class="right">
+      <div class="rating" rating="{{::product.product_rating}}">
+        <div class="icon" rel="star"></div>
+        <div class="icon" rel="star"></div>
+        <div class="icon" rel="star"></div>
+        <div class="icon" rel="star"></div>
+        <div class="icon" rel="star"></div>
+        <div class="base">
+          <div class="icon" rel="star"></div>
+          <div class="icon" rel="star"></div>
+          <div class="icon" rel="star"></div>
+          <div class="icon" rel="star"></div>
+          <div class="icon" rel="star"></div>
+        </div>
+      </div>
+      <a href="#/products/t/{{::product.id}}/" class="details">
+        {{text.top10Details}}
+        <div class="icon fright" rel="right"></div>
+      </a>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+
+<div ng-show="product && product == 'null'" class="noresults">
+  <p ng-bind-html="text.productsNone"></p>
+</div>
+
+<article class="rating" ng-if="ratings && clientInfo && clientInfo.review_flag == 1" ng-repeat="rating in ratings" ng-class="(product.reviewed && product.reviewed.id && userDetails.id == rating.user_id) ? 'my_rating' : ''">
+  <div class="wrapper">
+    <div class="inner">
+      <div class="header">
+        <div class="banner_container">
+          <div class="banner" rel="start" ng-if="rating.created">
+            <div class="month">{{(rating.created) ? (rating.created *1000 | date:'MMM' | translateMonth:selectedLanguage) : ""}}</div>
+            <div class="date">{{::(rating.created) ? (rating.created *1000 | date:'dd') : ""}}</div>
+          </div>
+          <div class="banner" rel="user" ng-if="rating.user_id">
+            <div class="icon" ng-class="(rating.user_image) ? 'w_pic' : 'wo_pic'" rel="user" ng-style="getUserPic(rating)"></div>
+          </div>
+        </div>
+        <div class="fleft two">
+          <div class="rating" rating="{{::rating.rating_value}}">
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="base">
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <p ng-if="rating.rating_comment != ''">
+        {{::rating.rating_comment}}
+      </p>
+    </div>
+  </div>
+</article>

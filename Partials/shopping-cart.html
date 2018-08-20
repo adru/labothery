@@ -1,0 +1,75 @@
+<script type="text/ng-template" id="cart_item.html">
+  <div class="category">{{item.data.category_name | getTranslation:selectedLanguage}}</div>
+  <div class="name">{{item.data.product_name | getTranslation:selectedLanguage}}</div>
+  <div class="icon" rel="edit"></div>
+  <div class="clear"></div>
+  <div class="quantity fleft">{{text.cartQuantity}}: {{item.quantity}}</div>
+  <div class="subtotal fright">{{ item.subtotal | currency : "$" : 2 }}</div>
+  <div class="clear"></div>
+</script>
+<script type="text/ng-template" id="cart_reward.html">
+  <div class="category">{{text.menuRewards}}</div>
+  <div class="name">{{item.data.reward_name | getTranslation:selectedLanguage}}</div>
+  <div class="icon" rel="subtract"></div>
+  <div class="clear"></div>
+  <div class="quantity fleft">{{text.cartQuantity}}: {{item.quantity}}, {{item.data.reward_points}} {{text.points}}</div>
+  <div class="subtotal fright">{{ item.subtotal | currency : "$" : 2 }}</div>
+  <div class="clear"></div>
+</script>
+          <article class="cart">
+            <form method="post" name="submitcart" id="submitcart" class="wrapper">
+              <div class="inner">
+                <div class="header">
+                  <h4>{{text.yourCart}}</h4>
+                </div>
+                <div class="item" ng-repeat="item in cartProducts track by $index" ng-if="cart.products && cart.products.length" ng-click="editProduct($index);" ng-include="(item.type == 'reward') ? 'cart_reward.html' : 'cart_item.html'"></div>
+                <a class="rewards short bar" ng-if="showRewards" href="#/rewards/" ng-click="closeMenu($event)">
+                  {{text.addRewards}}
+                </a>
+                <section class="variable" ng-if="variables.length && cart.products && cart.products.length" ng-repeat="cv in variables | orderBy:['order_id']" set_id="{{::cv.id}}" required="{{::cv.required_flag}}" limit="{{::cv.select_limit}}">
+                  <span class="subtitle">{{cv.set_name | getTranslation:selectedLanguage}}</span>
+                  <span class="optional" ng-if="cv.select_limit && cv.select_limit != 1">{{cv.select_limit == 0 ? text.cartNoMax : text.cartMax }} {{::(cv.select_limit > 1) ? cv.select_limit : ''}}</span>
+                  <span class="optional" ng-if="!cv.required_flag">{{text.cartOptional}}{{::cv.select_limit && cv.select_limit != 1 ? ', ' : ''}}</span>
+                  <div class="clear" ng-if="!cv.required_flag || cv.items.length != 1"></div>
+                  <!-- if select_limit == 1, dropdown? -->
+                  <div class="select_wrapper" ng-if="cv.select_limit == 1" ng-class="{'single' : cv.items.length == 1}">
+                    <select name="variable" ng-model="cv.selected" ng-change="evaluateTotal();" ng-options="cvi as ((cvi.item_name | getTranslation:selectedLanguage)+(cvi | buildValue : cvi.value : cvi.type)) for cvi in cv.items track by cvi.id">
+                    </select>
+
+                  </div>
+                  <div class="clear" ng-if="cv.items.length == 1"></div>
+                  <!-- if select_limit > 1, checkboxes? -->
+                  <div class="add_here" ng-if="cv.select_limit != 1">
+                    <div class="dyn select_wrapper" style="display: none;" ng-class="{'single' : cv.items.length == 1}">
+                      <select name="variable" ng-model="cv.selected" ng-options="cvi as ((cvi.item_name | getTranslation:selectedLanguage)+(cvi | buildValue : cvi.value : cvi.type)) for cvi in cv.items track by cvi.id">
+                      </select>
+                      <div class="icon" rel="close"></div>
+                    </div>
+                  </div>
+                  <div class="add_variable_item short bar" ng-click="addVariableItem($event, cv.select_limit);" ng-if="cv.select_limit != 1">{{text.cartAddOption}}</div>
+                </section>
+                <section class="total" ng-if="subtotal && subtotal > 0 && clientInfo.order_get_points_flag">
+                  <span class="subtitle">{{text.potentialPoints}}</span>
+                  <div class="total fright">{{Math.floor(subtotal/clientInfo.dollar_divisor)}}</div>
+                  <div class="clear"></div>
+                </section>
+                <section class="total" ng-if="cart.products && cart.products.length">
+                  <span class="subtitle">{{text.cartTotal}}</span>
+                  <div class="total fright">{{ total | currency : "$" : 2 }}</div>
+                  <div class="clear"></div>
+                </section>
+                <div class="noresults" ng-if="!cart.products || cart.products == null || !cart.products.length">
+                  <p>{{text.emptyCart}}</p>
+                </div>
+                <div class="short error"></div>
+              </div>
+              <input type="submit" name="submit" value="{{text.continue}}" submit-btn class="centered" ng-click="continueCart()" ng-if="cart.products && cart.products.length && subtotal >= 0" />
+              <section class="variable" ng-if="subtotal < 0">
+                <span class="note center">
+                  {{text.noLessThan0}}
+                </span>
+              </section>
+              <input type="submit" name="submit" value="{{text.close}}" submit-btn class="centered" ng-if="subtotal < 0" ng-click="close()" />
+            </form>
+            <div class="clear"></div>
+          </article>

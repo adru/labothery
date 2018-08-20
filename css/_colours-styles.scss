@@ -1,0 +1,831 @@
+// GLOBAL
+.liner {
+  background-color: $liner;
+  box-shadow: 0 0 10px 0 $linerShadow;
+}
+.dot1, .dot2 {
+  background-color: $loadingDots;
+  .submit_btn & {
+    background-color: $loadingDotsSubmit;
+  }
+}
+
+// FRAMEWORK
+a#orders {
+  background: $ordersHeaderBKG;
+  .order_status {
+    color: $ordersHeader;
+  }
+}
+nav#header {
+  background-color: $headerBKG;
+  box-shadow: 0 0 10px 0 $headerShadow;
+  .open.menu & {
+    .icon[rel="menu"] {
+      color: $openMenu;
+      background-color: $openMenuBKG;
+    }
+  }
+  .submit_btn, #login, #cart {
+    &:before {
+      background-color: $liner;
+      box-shadow: 0 0 10px 0 $linerShadow;
+    }
+    .dot1, .dot2 {
+      background-color: $headerScanDots;
+    }
+  }
+  #cart {
+    .num {
+      color: $cartQuantity;
+    }
+  }
+  color: $header;
+}
+nav#menu {
+  background-color: $menuBKG;
+  box-shadow: 0 0 0 0 $menuShadow;
+  .open & {
+    box-shadow: 0 0 10px 0 $menuShadow;
+  }
+  ul {
+    li {
+      background-color: $menuLIBKG;
+      a, .btn {
+        color: $menuLI;
+        &.selected {
+          color: $menuLISelected;
+          background-color: $menuLISelectedBKG;
+        }
+        &:active {
+          color: $menuLIActive;
+          background-color: $menuLIActiveBKG;
+        }
+      }
+      &.version {
+        background-color: transparent;
+        color: $darkGrey;
+      }
+    }
+  }
+  select[name="region"],
+  li[name="region"]:after,
+  select[name="language"],
+  li[name="language"]:after {
+    color: $menuLI;
+  }
+}
+.userPanel {
+  > .icon {
+    color: $userIcon;
+    background-color: $userIconBKG;
+  }
+  .right {
+    color: $userPanelRight;
+    background-color: $userPanelRightBKG;
+  }
+  nav#user-menu {
+    .icon {
+      color: $userPanelNav;
+      background-color: $userPanelNavBKG;
+      &:after {
+        background-color: $userPanelLiner;
+        box-shadow: 0 0 10px 0 $userPanelLinerShadow;
+      }
+      &.selected {
+        color: $userPanelNavSelected;
+        background-color: $userPanelNavSelectedBKG;
+      }
+    }
+  }
+}
+.shield#shield {
+  background-color: $shieldBKG;
+}
+.shortcuts {
+  > a {
+    color: $shortcut;
+    background-color: $shortcutBKG;
+    &:after {
+      background-color: $shortcutBar;
+    }
+  }
+  &.col_4.combo_34 {
+    div.right {
+      .rating {
+        background-color: $top10BKG;
+      }
+      .details {
+        color: $top10Details;
+        background-color: $top10DetailsBKG;
+      }
+    }
+  }
+}
+article {
+  .wrapper {
+    background-color: $articleBKG;
+  }
+  .price {
+    color: $price;
+    background-color: $priceBKG;
+    &.ordering {
+      .addtocart_btn {
+        color: $priceAddCart;
+        background: $priceAddCartBKG;
+      }
+    }
+  }
+}
+.banner {
+  &[rel="start"] {
+    color: $bannerStartDate;
+    background-color: $bannerStartDateBKG;
+  }
+  &[rel="news"] {
+    color: $bannerNews;
+    background-color: $bannerNewsBKG;
+  }
+  &[rel="close"] {
+    color: $bannerClose;
+    background-color: $bannerCloseBKG;
+  }
+  &[rel="locations"] {
+    color: $bannerLocation;
+    background-color: $bannerLocationBKG;
+  }
+  &[rel="user"] {
+    color: $bannerUser;
+    background-color: $bannerUserBKG;
+  }
+  &[rel="leaderboard"] {
+    color: $bannerLeaderboard;
+    background-color: $bannerLeaderboardBKG;
+  }
+  &[rel="heart"] {
+    color: $bannerFav;
+    background-color: $bannerFavBKG;
+    &.added, &.add {
+      background-color: $bannerFavdBKG;
+    }
+  }
+  &[rel="delete"] {
+    color: $bannerDelete;
+    background-color: $bannerDeleteBKG;
+  }
+  &.approved {
+    color: $approved;
+    background-color: $approvedBKG;
+  }
+  &.denied {
+    color: $denied;
+    background-color: $deniedBKG;
+  }
+  &.pending {
+    color: $pending;
+    background-color: $pendingBKG;
+  }
+}
+.searchBar_wrapper {
+  color: $searchBar;
+  background-color: $searchBarBKG;
+  .icon {
+    color: $searchIcon;
+  }
+}
+.bar {
+  color: $bar;
+  background-color: $barBKG;
+  &:active {
+    background-color: $barActive;
+  }
+}
+.noresults {
+  p, a {
+    color: $noresults;
+  }
+  .icon {
+    color: $noresultsIcon;
+  }
+}
+.resultcount {
+  color: $resultCount;
+  background-color: $resultCountBKG;
+}
+div.rating {
+  .base {
+    .icon {
+      color: $starBase;
+    }
+  }
+  &[rating] {
+    > .icon {
+      color: $starRating;
+    }
+  }
+}
+article.rating {
+  &.my_rating {
+    .inner {
+      border-color: $ratingMyBorder;
+    }
+  }
+}
+
+// PAGES
+.news, .instagram {
+  .wrapper > .location {
+    color: $newsLocation;
+    background-color: $newsLocationBKG;
+  }
+  .external {
+    color: $external;
+    background-color: $externalBKG;
+    .icon {
+      color: $external;
+    }
+  }
+  article.notification {
+    .wrapper {
+      border-color: $notificationBorder;
+    }
+  }
+}
+.welcome {
+  color: $welcome;
+  background-color: $welcomeBKG;
+  box-shadow: 0 0 10px 0 $headerShadow;
+  .icon {
+    background: $welcomeBKG !important;
+    color: $welcome !important;
+  }
+}
+.show_more {
+  color: $showMore;
+  background-color: $showMoreBKG;
+}
+.top10 {
+  div#header {
+    color: $top10Header;
+    background-color: $top10HeaderBKG;
+    .icon {
+      color: $top10HeaderIcon;
+    }
+  }
+  .product_name {
+    color: $productName;
+    background-color: $productNameBKG;
+  }
+  article a {
+    color: inherit;
+    * {
+      color: inherit;
+    }
+  }
+/*
+  .banner_container {
+    .banner {
+      background-color: $darkGrey;
+      color: $white;
+    }
+  }
+*/
+}
+.products, .favourites, .gallery {
+  ul {
+    li {
+      .product_name {
+        color: $productName;
+        background-color: $productNameBKG;
+      }
+      .icon[rel="heart"] {
+        color: $bannerFav;
+        background-color: $bannerFavdBKG;
+      }
+      &.w_pic {
+        color: $innerLi;
+        background-color: $innerLiBKG;
+      }
+    }
+  }
+}
+.locations {
+  article {
+    a {
+      color: $location;
+    }
+  }
+  .time {
+    &.closed, &.na {
+      color: $locationClosed;
+      background-color: $locationClosedBKG;
+    }
+    &.open {
+      color: $locationOpen;
+      background-color: $locationOpenBKG;
+    }
+  }
+}
+.rewards {
+  .content {
+    .line {
+      background-color: $rewardLine;
+      box-shadow: 0 0 10px 0 $rewardLineShadow;
+    }
+    .icon {
+      &[rel="rewards"] {
+        .claim_btn {
+          color: $rewardClaimBtn;
+          background-color: rgba($rewardClaimBtnBKG,0.75);
+        }
+        &.wo_pic {
+          color: $rewardIcon;
+          background-color: $rewardIconBKG;
+        }
+      }
+      &[rel="user"] {
+        color: $userIcon;
+        background-color: $userIconBKG;
+        .line {
+          background-color: $rewardUserLine;
+        }
+      }
+    }
+    .point_bubble {
+      color: $pointMarker;
+    }
+  }
+  .progress_bar {
+    background-color: rgba($rewardBarBKG, 0.25);
+    .progress {
+      background-color: rgba($rewardBarProgress, 0.75);
+    }
+  }
+}
+.leaderboard {
+  article {
+    .bar.short {
+      color: $white;
+    }
+    &.my_rank {
+      .profile {
+        color: $myRankIcon;
+        background-color: $myRankIconBKG;
+      }
+    }
+  }
+  table {
+    tr {
+      &.me {
+        color: $leaderboardMe;
+        background-color: $leaderboardMeBKG;
+      }
+      &:nth-child(even) {
+        background-color: $leaderboardEven;
+      }
+    }
+    .profile {
+      color: $userIcon;
+      background-color: $userIconBKG;
+    }
+  }
+}
+.history {
+  .history_wrapper article.passport {
+    background-color: $main;
+    .inner {
+      color: $white;
+    }
+  }
+  .location_wrapper {
+    .closest {
+      color: $locationWrapper;
+    }
+  }
+  .receipt_container {
+    .location_bar {
+      color: $newsLocation;
+      background-color: $newsLocationBKG;
+    }
+    .complete {
+      color: $orderComplete;
+      background-color: $orderCompleteBKG;
+      .icon {
+        color: $orderComplete;
+      }
+    }
+    .order_status {
+      color: $newsLocation;
+      background-color: $darkGrey;
+    }
+  }
+}
+.settings {
+  .bar.short {
+    &.facebook {
+      color: $facebook;
+      background-color: $facebookBKG;
+    }
+    &.delete {
+      color: $delete;
+      background-color: $deleteBKG;
+    }
+    &.notifications_on {
+      background-color: $notifOnBKG;
+      .icon {
+        background-color: $notifOnIconBKG;
+      }
+    }
+    &.notifications_off {
+      background-color: $notifOffBKG;
+      .icon {
+        background-color: $notifOffIconBKG;
+      }
+    }
+  }
+}
+.orders {
+  .receipt_container {
+    .location_bar {
+      color: $newsLocation;
+      background-color: $newsLocationBKG;
+    }
+    .complete {
+      color: $orderComplete;
+      background-color: $orderCompleteBKG;
+      .icon {
+        color: $orderComplete;
+      }
+    }
+    .order_status {
+      color: $newsLocation;
+      background-color: $darkGrey;
+    }
+  }
+}
+.selectedRegion.notice {
+  color: $selectedRegion;
+  border-top-color: $selectedRegionBorder;
+  background: $selectedRegionBKG;
+}
+
+// REGIONS
+.region_btn {
+  background-color: $regionBtnBKG;
+  color: $regionBtn;
+  &.selected {
+    color: $regionBtnSelected;
+    background-color: $regionBtnSelectedBKG;
+  }
+}
+
+.select_wrapper.regions {
+  &:after {
+    color: $regionSelect;
+  }
+}
+
+// FORMS
+section#forms {
+  ul {
+    li {
+      a {
+        color: $consoleLI;
+        background-color: $consoleLIBKG;
+      }
+    }
+  }
+  > .icon {
+    color: $consoleIcon;
+    background-color: $consoleIconBKG;
+  }
+  &.user {
+    #console {
+      article {
+        &.points {
+          .qr_code, .note {
+            border-top-color: $variationBtmBorder;
+          }
+        }
+      }
+      textarea {
+        color: $reviewTextarea;
+      }
+    }
+  }
+  div#login, li.scan {
+    color: $consoleLIBtn;
+    background-color: $consoleLIBtnBKG;
+  }
+  &.favourite {
+    > .icon {
+      color: $bannerFav;
+      background-color: $bannerFavdBKG;
+    }
+  }
+  &.reward, &.voteHelper, &.locationForm, &.scan {
+    #console {
+      article.reward, article.voteHelper, article.locationForm, article.scan {
+        color: $article;
+        .inner.point_cost {
+          color: $rewardCost;
+          background-color: $rewardCostBKG;
+        }
+        ul {
+          li.claimed {
+            color: $rewardCost;
+            background-color: $rewardCostBKG;
+            &.token {
+              color: $rewardClaimToken;
+              background-color: $rewardClaimTokenBKG;
+            }
+            &.close {
+              color: $rewardClaimClose;
+              background-color: $rewardClaimCloseBKG;
+            }
+          }
+        }
+      }
+    }
+    &.claimed {
+      background-color: rgba($rewardClaimedBKG, 0.75);
+    }
+  }
+  &.locationForm {
+    #console {
+      input[name^='pin'] {
+        background: $white;
+        border: 1px solid $lightGrey;
+        box-shadow: inset 0px 0px 0px 1px $darkGrey;
+        color: $black;
+      }
+    }
+  }
+  #console {
+    .close {
+      color: $white;
+    }
+    article.rating {
+      .inner {
+        .fleft {
+          .rating {
+            >.icon {
+              color: $starBase;
+              &.rated {
+                color: $starRating;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &.add_to_cart, &.show_cart, &.confirm_cart, &.payment_details {
+    .subtitle {
+      color: $cartSubtitle;
+    }
+    .variation.btn, select[name="variable"] {
+      color: $variation;
+      background-color: $variationBKG;
+      border-color: $variationBorder;
+      &.selected {
+        color: $variationSelected;
+        background: $variationSelectedBKG;
+        border-color: $variationSelectedBorder;
+      }
+    }
+    .select_wrapper {
+      &:after {
+        color: $variation;
+      }
+    }
+    section {
+      border-bottom-color: $variationBtmBorder;
+    }
+  }
+  &.show_cart {
+    .item {
+      border-bottom-color: $variationBtmBorder;
+    }
+    .quantity, .subtotal {
+      color: $cartSubtitle;
+    }
+    .noresults {
+      p, a {
+        color: $cartNoResults;
+      }
+    }
+  }
+  &.payment_details,
+  &.confirm_cart {
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="checkbox"],
+    textarea[name="notes"] {
+      border-color: $variationBorder;
+      background: $variationBKG;
+      color: $variation;
+      &.required {
+        border-color: red;
+      }
+    }
+    .variable {
+      &.location {
+        .loc_btn {
+          .icon {
+            color: $black;
+          }
+        }
+      }
+    }
+    #console {
+      .coupons {
+        .coupon_name {
+          color: $main;
+        }
+        .coupon_original {
+          color: $darkGrey;
+        }
+        .coupon_discount {
+          color: $main;
+        }
+        .delete {
+          color: $white;
+          background: $darkGrey;
+        }
+      }
+      .cards {
+        li {
+          .btn {
+            color: $darkGrey;
+            background: $white;
+            border-color: $variationBorder;
+            &.selected {
+              color: $white;
+              background: $main;
+              border-color: $main;
+            }
+          }
+          .delete {
+            color: $white;
+            background: $darkGrey;
+          }
+        }
+      }
+    }
+    .w_coupon {
+      color: $main;
+    }
+  }
+  &.payment_details {
+    &.paid {
+      background-color: rgba($rewardClaimedBKG, 0.75);
+    }
+    .thankyou {
+      ul {
+        li {
+          &.close {
+            color: $rewardClaimClose;
+            background-color: $rewardClaimCloseBKG;
+          }
+        }
+      }
+    }
+  }
+  &.my_qr {
+    .note {
+      border-top-color: $variationBtmBorder;
+    }
+    .close {
+      color: $white;
+      background-color: $black;
+    }
+  }
+  &.voteHelper {
+    #console {
+      .close {
+        color: $consoleLI;
+        //background-color: $consoleCancelBKG;
+      }
+    }
+  }
+  &.passport {
+    #console ul {
+      li {
+        background-color: $passportBKG;
+      }
+    }
+  }
+}
+#console {
+  li {
+    color: $consoleLI;
+    background-color: $consoleLIBKG;
+  }
+  li#facebook {
+    > a {
+      background-color: $facebookBKG;
+    }
+  }
+  li#login, li#register {
+    color: $consoleLIBtn;
+    background-color: $consoleLIBtnBKG;
+  }
+  &.forgot {
+    li#forgot {
+      color: $consoleLIBtn;
+      background-color: $consoleLIBtnBKG;
+    }
+  }
+  a.short {
+    color: $consoleLIShort;
+    background-color: $consoleLIShortBKG;
+  }
+  input {
+    color: $consoleInput;
+    background-color: $consoleInputBKG;
+    &[type="submit"] {
+      color: $consoleSubmit;
+      background-color: $consoleSubmitBKG;
+      &.cancel {
+        background-color: $consoleCancelBKG;
+      }
+    }
+  }
+  .donthave {
+    color: $consoleLI;
+    background-color: $consoleLIBKG;
+  }
+  .or {
+    color: $lightGrey;
+  }
+  .short {
+    &.error {
+      color: $error;
+      background-color: $errorBKG;
+    }
+  }
+  article {
+    &.rating {
+      input[type="submit"] {
+        color: $ratingSubmit;
+        background-color: $ratingSubmitBKG;
+      }
+    }
+    .bar {
+      color: $bar;
+    }
+  }
+}
+
+
+.subscription_settings {
+  .subtitle {
+    color: $cartSubtitle;
+  }
+  .subscriptions {
+    .bar.short {
+      &.disabled {
+        background: $lightGrey;
+      }
+    }
+  }
+  .payment_details {
+    section.variable {
+      .add {
+        background: $main;
+        color: $white;
+      }
+    }
+    .cards {
+      li {
+        .btn {
+          color: $darkGrey;
+          background: $white;
+          border-color: $variationBorder;
+          &.selected {
+            color: $white;
+            background: $main;
+            border-color: $main;
+          }
+        }
+        .delete {
+          color: $white;
+          background: $darkGrey;
+        }
+      }
+    }
+  }
+}
+
+.update,
+.offline {
+  color: $offline;
+}
+
+.update {
+  .update_btn {
+    background: $main;
+  }
+}

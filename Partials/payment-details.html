@@ -1,0 +1,159 @@
+          <article class="cart">
+            <form method="post" name="paymentdetails" id="paymentdetails" class="wrapper">
+              <a href class="bar medium right shadow" ng-click="backToCart();" ng-if="!cart.passport && !cart.subscription">
+                <div class="icon" rel="left"></div>
+                {{::text.orderDetails}}
+              </a>
+              <div class="inner">
+                <div class="header">
+                  <h4>{{::text.paymentDetails}}</h4>
+                  <span class="subtitle">{{::text.stripePowered}}</span>
+                </div>
+                <div class="spinner" ng-if="!cards">
+                  <div class="dot1"></div>
+                  <div class="dot2"></div>
+                </div>
+                <ul class="cards" ng-if="cards.data.length" ng-show="!newCard">
+                  <li ng-repeat="card in cards.data">
+                    <div class="btn" card_id="{{card.id}}" ng-click="selectCard($event);">
+                      <span class="number">XXXX XXXX XXXX {{::card.last4}}</span>
+                      <br>{{text.pay_expire}} {{::card.exp_month | twoDigits}}/{{::card.exp_year | twoDigits}}
+                    </div>
+                    <div class="delete" card_id="{{card.id}}" ng-click="deleteCard($event);">
+                      <div class="icon" rel="close"></div>
+                    </div>
+                  </li>
+                </ul>
+                <div ng-show="cards && cards.data && cards.data.length">
+                  <div class="add_variable_item short bar" ng-click="toggleAddCard();">{{(newCard) ? text.useCard : text.addCard}}</div>
+                </div>
+                <div ng-if="newCard">
+                  <section class="variable">
+                    <span class="subtitle">{{text.pay_name}}</span>
+                    <div class="clear"></div>
+                    <input type="text" id="name" name="name" required="required" ng-value="(cart.name) ? cart.name : ''" />
+                  </section>
+                  <section class="variable">
+                    <div class="number mr2">
+                      <span class="subtitle">{{text.pay_cardnum}}</span>
+                      <div class="clear"></div>
+                      <input type="text" pattern="[0-9]{13,16}" id="number" name="number" required="required" data-stripe="number" />
+                    </div>
+                    <div class="cvc">
+                      <span class="subtitle">{{text.pay_cvc}}</span>
+                      <div class="clear"></div>
+                      <input type="text" pattern="[0-9]{3,4}" id="cvc" name="cvc" required="required" data-stripe="cvc" />
+                    </div>
+                    <div class="clear"></div>
+                  </section>
+                  <section class="variable">
+                    <div class="expiry mr2">
+                      <span class="subtitle">{{text.pay_expiry}}</span>
+                      <div class="clear"></div>
+                      <div class="select_wrapper month mr2">
+                        <select id="month" name="month" required="required" data-stripe="exp-month">
+                          <option value="01" ng-selected="thisMonth == 0">01</option>
+                          <option value="02" ng-selected="thisMonth == 1">02</option>
+                          <option value="03" ng-selected="thisMonth == 2">03</option>
+                          <option value="04" ng-selected="thisMonth == 3">04</option>
+                          <option value="05" ng-selected="thisMonth == 4">05</option>
+                          <option value="06" ng-selected="thisMonth == 5">06</option>
+                          <option value="07" ng-selected="thisMonth == 6">07</option>
+                          <option value="08" ng-selected="thisMonth == 7">08</option>
+                          <option value="09" ng-selected="thisMonth == 8">09</option>
+                          <option value="10" ng-selected="thisMonth == 9">10</option>
+                          <option value="11" ng-selected="thisMonth == 10">11</option>
+                          <option value="12" ng-selected="thisMonth == 11">12</option>
+                        </select>
+                      </div>
+                      <div class="select_wrapper year">
+                        <select id="year" name="year" required="required" data-stripe="exp-year">
+                          <option value="{{::thisYear}}">{{::thisYear}}</option>
+                          <option value="{{::thisYear+1}}">{{::thisYear+1}}</option>
+                          <option value="{{::thisYear+2}}">{{::thisYear+2}}</option>
+                          <option value="{{::thisYear+3}}">{{::thisYear+3}}</option>
+                          <option value="{{::thisYear+4}}">{{::thisYear+4}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="cvc" ng-if="!cart.subscription">
+                      <span class="subtitle">{{text.pay_save}}</span>
+                      <div class="clear"></div>
+                      <div class="select_wrapper">
+                        <select id="save" name="save" required="required">
+                          <option value="0">{{text.no}}</option>
+                          <option value="1">{{text.yes}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <input ng-if="cart.subscription" type="hidden" name="save" value="1" />
+                    <div class="clear"></div>
+                  </section>
+                </div>
+                <div ng-if="cart.subscription && clientInfo.coupon_flag == 1 && !cart.coupon" class="coupon">
+                  <!-- this coupon input will only show up for subscriptions... -->
+                  <section class="variable">
+                    <span class="subtitle">{{text.cartCoupon}}</span>
+                    <div class="clear"></div>
+                    <input type="text" name="coupon_code" class="number" />
+                    <div class="add" ng-click="addCoupon();" style="display: block;">{{text.add}}</div>
+                    <div class="clear"></div>
+                  </section>
+                </div>
+                <div class="coupons" ng-if="cart.coupon">
+                  <span class="subtitle">{{text.cartCoupon}}</span>
+                  <div class="clear"></div>
+                  <div class="fleft">
+                    <span class="coupon_name">{{cart.coupon.id}}</span><br>
+                    <span class="coupon_original">{{original_total | currency : "$" : 2}} </span>
+                    <span class="coupon_discount" ng-if="cart.coupon.amount_off">- {{(cart.coupon.amount_off/100) | currency : "$" : 2}}</span>
+                    <span class="coupon_discount" ng-if="cart.coupon.percent_off">- {{cart.coupon.percent_off}}%</span>
+                    <input type="hidden" name="coupon_code" value="{{cart.coupon.id}}" />
+                  </div>
+                  <div class="fright delete" ng-click="deleteCoupon($event);">
+                    <div class="icon" rel="close"></div>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <section class="total" ng-if="cart.total">
+                  <span ng-if="!cart.subscription" class="subtitle">{{::text.cartTotal}}</span>
+                  <span ng-if="cart.subscription" class="subtitle" data-interval="{{cart.subscription.interval}}" data-count="{{cart.subscription.interval_count}}" data-coupon="{{(cart.coupon)}}" data-type="" cart-intervals></span>
+                  <div class="total fright" ng-class="{'w_coupon' : cart.coupon}">{{ total | currency : "$" : 2 }}</div>
+                  <div class="clear"></div>
+                </section>
+                <section class="total" ng-if="cart.coupon && cart.subscription">
+                  <span ng-if="cart.subscription" class="subtitle" data-interval="{{cart.subscription.interval}}" data-count="{{cart.subscription.interval_count}}" data-coupon="{{(cart.coupon)}}" data-type="sub" cart-intervals></span>
+                  <div class="total fright">{{ original_total | currency : "$" : 2 }}</div>
+                  <div class="clear"></div>
+                </section>
+                <section class="variable note">
+                  <p ng-if="!text.custom.orderNote && !text.custom.paymentDisclaimer">{{::text.orderOpen}}</p>
+                  <p ng-if="text.custom.orderNote">{{::text.custom.orderNote}}</p>
+                  <p ng-if="text.custom.paymentDisclaimer">{{::text.custom.paymentDisclaimer}}</p>
+                </section>
+                <div class="short error"></div>
+              </div>
+              <input ng-if="cart.subscription" type="hidden" name="plan" value="{{cart.subscription.id}}" />
+              <input type="submit" name="submit" value="{{(cart.subscription) ? text.becomeAMember : text.submitCart}}" submit-btn class="centered" ng-if="cards" ng-click="submitPayment();" />
+              <div class="clear"></div>
+            </form>
+            <div class="thankyou">
+              <ul>
+                <li class="claimed">
+                  {{::text.thankYou}}
+                </li>
+                <li class="claimed token" ng-if="!text.custom.order_sent">
+                  {{::text.order_sent}}
+                </li>
+                <li class="claimed token" ng-if="text.custom.order_sent">
+                  {{::text.custom.order_sent}}
+                </li>
+                <li class="claimed close" ng-click="closePopup();">
+                  {{::text.close}}
+                </li>
+              </ul>
+            </div>
+            <div class="close prethankyou" ng-click="closePopup();">
+              {{::text.close}}
+            </div>
+          </article>

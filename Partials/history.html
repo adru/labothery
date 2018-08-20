@@ -1,0 +1,62 @@
+<script type="text/ng-template" id="scan_history.html">
+  <div class="wrapper">
+    <div class="inner">
+      <div class="header" ng-class="event.kind != 'redeem' && 'scan'">
+        <div class="banner_container">
+          <div class="banner" rel="start" ng-if="event.created">
+            <div class="month">{{(event.created) ? (event.created *1000 | date:'MMM' | translateMonth:selectedLanguage) : ""}}</div>
+            <div class="date">{{::(event.created) ? (event.created *1000 | date:'dd') : ""}}</div>
+          </div>
+        </div>
+        <div class="fleft one">
+          <h4 ng-bind-html="getEventKind(event.kind)"></h4> <span class="claim_number">{{::event.redeem_token}}</span>
+          <h5 ng-if="event.value_points">
+            {{::(event.kind != "redeem" && event.value_points > 0) ? "+" : "-"}} {{::event.value_points | abs}}
+            <span ng-if="event.value_points == 1">{{text.point}}</span>
+            <span ng-if="event.value_points != 1">{{text.points}}</span>
+          </h5>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <p ng-if="event.reward_name">
+        {{event.reward_name | getTranslation:selectedLanguage}}
+      </p>
+    </div>
+  </div>
+</script>
+<script type="text/ng-template" id="order_history.html">
+  <div class="wrapper">
+    <div class="inner">
+      <div class="header scan">
+        <div class="banner_container">
+          <div class="banner" rel="start" ng-if="event.created">
+            <div class="month">{{(event.created) ? (event.created *1000 | date:'MMM' | translateMonth:selectedLanguage) : ""}}</div>
+            <div class="date">{{::(event.created) ? (event.created *1000 | date:'dd') : ""}}</div>
+          </div>
+        </div>
+        <div class="fleft one">
+          <h4 ng-bind-html="getEventKind(((event.json.subscription) ? 'plan' : event.kind))"></h4>
+          <h5 ng-if="event.total_value">
+            {{:: event.total_value | currency : "$" : 2 }}
+          </h5>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <a class="bar short receipt" href="#/orders/{{::event.id}}/" ng-if="!event.json.subscription">
+      {{(clientInfo.order_get_points_flag && userDetails && !event.points) ? text.order_claim : text.orderViewReceipt}}
+      <div class="icon" rel="right"></div>
+    </a>
+  </div>
+</script>
+
+<div class="spinner" ng-if="!history">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<article ng-repeat="(key, event) in history | orderBy:['-created'] track by key" ng-if="history" ng-include="(event.kind == 'order') ? 'order_history.html' : 'scan_history.html'"></article>
+<div ng-if="history && !history.length" class="noresults">
+  <p ng-bind-html="text.historyNone"></p>
+</div>
+
+<!-- featured images? -->

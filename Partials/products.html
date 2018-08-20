@@ -1,0 +1,54 @@
+<div class="spinner" ng-if="!categories && !products">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<a href back-button ng-if="!hideBackBar && category" class="bar medium right shadow">
+  <div class="icon" rel="left"></div>
+  {{(category.parent_id) ? (getCategoryName(category.parent_id) | getTranslation:selectedLanguage) : text.productTitle}}
+</a>
+<div class="searchBar_wrapper" ng-show="query || categories.length || products.length && (filteredProductsW.length || filteredProductsWO.length)">
+  <input ng-model="query" class="searchBar" placeholder="{{text.productSearchPre}} {{(searchWithin) ? searchWithin : text.productSearch | getTranslation:selectedLanguage}}..." ng-keyup="saveQuery($event);">
+  <div class="icon" rel="search"></div>
+</div>
+<div class="select_wrapper regions" ng-if="regions && regions.length">
+  <select name="region" class="selectedRegion notice" dir="rtl" ng-options="regi as (regi.region_name | getTranslation:selectedLanguage) for regi in regions track by regi.id" ng-model="selected.region" ng-change="changeRegion(selected.region.id); changeTop10Region();"></select>
+</div>
+<ul id="categories" ng-if="clientInfo && clientInfo.product_mode != 'product' && categories.length && !query">
+  <li ng-repeat="category in categories" class="wo_pic">
+    <a href="#/products/{{::category.id}}/" class="bar medium">
+      {{category.category_name | getTranslation:selectedLanguage}}
+      <div class="icon" rel="right"></div>
+    </a>
+    <div class="liner width"></div>
+  </li>
+</ul>
+<div ng-show="categories && !categories.length && products && !products.length" class="noresults">
+  <p ng-bind-html="text.productsNone"></p>
+</div>
+<div class="bar short resultcount" ng-if="query">
+  {{(filteredProductsW.length + filteredProductsWO.length)}}
+  <span ng-if="(filteredProductsW.length + filteredProductsWO.length) == 1">{{text.result}}</span>
+  <span ng-if="(filteredProductsW.length + filteredProductsWO.length) != 1">{{text.results}}</span>
+</div>
+<div id="products" ng-show="clientInfo && clientInfo.product_mode == 'product' || query || !query && products.length">
+  <ul>
+    <li ng-repeat="product in filteredProductsW = (productsWpic | filter:search) | orderBy:['-favourited','order_id','product_name']" class="w_pic" ng-show="clientInfo && clientInfo.product_mode == 'product' || query || product.category_id == category.id || categoryId == 'null' && !product.category_id">
+      <a href="#/products/{{::!category ? '0' : category.id}}/{{::product.id}}/" class="product_name">{{product.product_name | getTranslation:selectedLanguage}}</a>
+      <a href="#/products/{{::!category ? '0' : category.id}}/{{::product.id}}/" class="product_thumb" title="{{product.product_name | getTranslation:selectedLanguage}}" ng-style="{{::thumbBack(product)}}">
+        <div class="icon" rel="heart" ng-if="product.favourited"></div>
+      </a>
+    </li>
+    <li ng-repeat="product in filteredProductsWO = (productsWOpic | filter:search) | orderBy:['-favourited','order_id','product_name']" class="wo_pic" ng-show="clientInfo && clientInfo.product_mode == 'product' || query || product.category_id == category.id || categoryId == 'null' && !product.category_id">
+      <a href="#/products/{{::!category ? '0' : category.id}}/{{::product.id}}/" class="bar medium" ng-class="(product.favourited) ? 'favd' : ''">
+        {{product.product_name | getTranslation:selectedLanguage}}
+        <div class="icon" rel="heart" ng-if="product.favourited"></div>
+        <div class="icon" rel="right"></div>
+      </a>
+      <div class="liner width"></div>
+    </li>
+    <div ng-show="products && !filteredProductsW.length && !filteredProductsWO.length" class="noresults">
+      <p ng-if="!query" ng-bind-html="text.productsNone"></p>
+      <p ng-if="query" ng-bind-html="text.searchNo"></p>
+    </div>
+  </ul>
+</div>

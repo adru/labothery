@@ -1,0 +1,107 @@
+<div class="spinner" ng-if="!userDetails">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+
+<article ng-if="userDetails && userDetails.fb_id">
+  <div class="wrapper">
+    <div class="bar short facebook">
+      <div class="icon" rel="facebook"></div>
+      {{text.settingsFacebook}}
+    </div>
+  </div>
+</article>
+
+<article ng-if="userDetails">
+  <div class="wrapper">
+    <div href="#name" class="bar short" ng-click="editName();">
+      <div class="icon" rel="edit"></div>
+      {{text.formName}}
+    </div>
+    <div class="inner">
+      <p>{{userDetails.name}}</p>
+    </div>
+  </div>
+</article>
+
+<article ng-if="userDetails.username">
+  <div class="wrapper">
+    <div href="#username" class="bar short" ng-click="editUsername();">
+      <div class="icon" rel="edit"></div>
+      {{text.formEmail}}
+    </div>
+    <div class="inner">
+      <p>{{userDetails.username}}</p>
+    </div>
+  </div>
+</article>
+
+<article ng-if="userDetails && !userDetails.username">
+  <div class="wrapper">
+    <div href="#username" class="bar short" ng-click="editUsername();">
+      <div class="icon" rel="edit"></div>
+      {{text.formAdd}} {{text.formEmail}}
+    </div>
+  </div>
+</article>
+
+<article ng-if="userDetails.password">
+  <div class="wrapper">
+    <div href="#password" class="bar short" ng-click="editPassword();">
+      <div class="icon" rel="edit"></div>
+      {{text.formPassword}}
+    </div>
+    <div class="inner">
+      <p>********</p>
+    </div>
+  </div>
+</article>
+
+<article ng-if="userDetails && !userDetails.password">
+  <div class="wrapper">
+    <div href="#password" class="bar short" ng-click="editPassword();">
+      <div class="icon" rel="edit"></div>
+      {{text.formAdd}} {{text.formPassword}}
+    </div>
+  </div>
+</article>
+
+<article ng-if="userDetails && !userDetails.fb_id">
+  <div class="wrapper">
+    <div href="#facebook" class="bar short facebook" ng-click="facebook();">
+      <div class="icon" rel="facebook"></div>
+      {{text.settingsConnect}}
+    </div>
+  </div>
+</article>
+
+<article ng-if="token">
+  <div class="wrapper" ng-class="{'updating' : updatingNotify}">
+    <div href="#notifications" class="bar short notifications_{{(tokenStatus == 1) ? 'on' : 'off'}}" ng-click="notificationToggle();">
+      <div class="icon" rel="{{(tokenStatus == 1) ? 'close' : 'check'}}"></div>
+      {{(tokenStatus == 1) ? text.notificationsOn : text.notificationsOff}}
+    </div>
+  </div>
+</article>
+
+<br><br><br>
+
+<article ng-if="userDetails">
+  <div class="wrapper">
+    <div href="#logout" class="bar short logout" ng-click="logout();">
+      <div class="icon" rel="logout"></div>
+      {{text.logout}}
+    </div>
+  </div>
+</article>
+
+<br><br><br>
+
+<article ng-if="userDetails">
+  <div class="wrapper">
+    <div href="#delete" class="bar short delete" ng-click="deleteUser();">
+      <div class="icon" rel="close"></div>
+      {{text.settingsDelete}}
+    </div>
+  </div>
+</article>

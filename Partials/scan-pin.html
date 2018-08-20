@@ -1,0 +1,35 @@
+          <!-- SCAN -->
+          <div class="spinner" rel="scan" ng-if="!scan">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+          </div>
+          <article class="scan" ng-if="scan">
+            <div class="wrapper">
+              <div class="inner">
+                <div class="header">
+                  <h4 class="title" ng-if="!claimed">{{text.custom.verifyScan}}</h4>
+                  <h4 class="title" ng-if="claimed">{{text.custom.verifiedScan}}</h4>
+                </div>
+                <p class="desc" ng-if="!claimed" ng-bind-html="text.custom.verifyScanWhy"></p>
+                <p class="desc" ng-if="claimed" ng-bind-html="text.custom.youNowHave"></p>
+              </div>
+              <div class="inner point_cost">
+                <p ng-if="!claimed">{{scan_points}} {{(scan_points == 1) ? text.point : text.points}}</p>
+                <p ng-if="claimed">{{userDetails.current_points}} {{(userDetails.current_points == 1) ? text.point : text.points}}</p>
+              </div>
+              <div class="inputs" ng-if="!claimed">
+                <input type="password" maxlength="3" id="pin" name="pin" required="required" placeholder="{{text.custom.pinPlaceholder}}" ng-keyup="$event.keyCode == 13 && hitSubmit($event)" />
+                <div class="short error"></div>
+                <div class="clear"></div>
+                <br>
+              </div>
+            </div>
+            <ul>
+              <li class="scan" ng-if="!claimed">
+                <input type="submit" ng-click="verify_pin($event);" value="{{text.custom.confirm}}" submit-btn class="scan_claim centered" />
+              </li>
+              <li class="close" ng-click="closePopup($event);">
+                {{text.close}}
+              </li>
+            </ul>
+          </article>

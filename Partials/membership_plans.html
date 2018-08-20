@@ -1,0 +1,53 @@
+<script type="text/ng-template" id="plan.html">
+  <div class="wrapper">
+    <div class="inner">
+      <div class="fleft">
+        <strong>{{plan.name}}</strong>
+      </div>
+      <div class="fright cost">
+        {{(plan.amount/plan.interval_count/100) | currency : "$" : 2 }}/{{plan.interval}}
+      </div>
+      <div class="clear"></div>
+      <p ng-if="plan.metadata && plan.metadata.description != 'null'" ng-bind-html="plan.metadata.description"></p>
+    </div>
+  </div>
+</script>
+
+<article class="alignCenter">
+  <div class="wrapper">
+    <div class="inner">
+      <p ng-bind-html="(text.custom.plansIntro) ? text.custom.plansIntro : text.plansIntro"></p>
+    </div>
+  </div>
+</article>
+<div class="spinner" ng-if="!plans">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<div class="bar short alignCenter" ng-if="activePlan">Your current plan</div>
+<article ng-if="activePlan" class="activePlan">
+  <div class="wrapper">
+    <div class="inner">
+      <div class="fleft">
+        <strong>{{activePlan.stripe_response.plan.name}}</strong>
+      </div>
+      <div class="fright cost">
+        {{(activePlan.stripe_response.plan.amount/activePlan.stripe_response.plan.interval_count/100) | currency : "$" : 2 }}/{{activePlan.stripe_response.plan.interval}}
+      </div>
+      <div class="clear"></div>
+      <p ng-if="activePlan.stripe_response.plan.metadata && activePlan.stripe_response.plan.metadata.description != 'null'" ng-bind-html="activePlan.stripe_response.plan.metadata.description"></p>
+      <section class="variable marginBottom10">
+        <span class="subtitle">{{(activePlan.stripe_response.status != 'canceled') ? "Membership Renews on" : "Membership Expires on"}}</span>
+        <div class="clear"></div>
+        {{activePlan.stripe_response.current_period_end*1000 | date:'MMMM d' | translateDate:selectedLanguage}}
+      </section>
+      <div class="add_variable_item short bar" ng-click="cancelSubscription(activePlan.subscription_token);" ng-if="activePlan.stripe_response.status != 'canceled'">Cancel Membership</div>
+      <div class="add_variable_item short bar disabled" ng-if="activePlan.stripe_response.status == 'canceled'">Cancelled</div>
+    </div>
+  </div>
+</article>
+<div class="bar short alignCenter" ng-if="activePlan">Other plans</div>
+<article ng-repeat="(key, plan) in plans | orderBy:['id'] track by key" ng-if="plans" ng-include="'plan.html'" ng-class="{'selected' : activePlan && plan.id == activePlan.stripe_response.plan.id}" class="tier" ng-click="selectPlan($event)" data-planId="{{plan.id}}"></article>
+<div ng-if="plans && !plans.length" class="noresults">
+  <p ng-bind-html="text.plansNone"></p>
+</div>

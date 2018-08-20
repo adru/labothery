@@ -1,0 +1,201 @@
+/***
+  * GLOBAL
+  ***/
+
+* {
+  // prevent copy paste, to allow, change 'none' to 'text'
+  @include build-prefix-values('user-select', 'none');
+
+  // prevent dragging of elements by hold and move
+  @include build-prefix-values('user-drag', 'none');
+
+  // prevent callout to copy image, etc when tap to hold
+  @include build-prefix-values('touch-callout', 'none');
+
+  // prevent webkit from resizing text to fit
+  @include build-prefix-values('text-size-adjust', 'none');
+
+  // make transparent link selection, adjust last value opacity 0 to 1.0
+  @include build-prefix-values('tap-highlight-color', 'rgba(0,0,0,0)');
+}
+
+// allow for forms, get rid of the apple rounded corners
+textarea, input, select {
+  @include build-prefix-values('user-select', 'auto !important');
+  @include build-prefix-values('appearance', 'none');
+  outline: none;
+  border-radius: 0 !important;
+}
+
+// global items, not part of overall layout
+h1, h2, h3, h4, h5 {
+  margin: 0;
+  padding: 0;
+}
+a, a:link, a:active, a:visited {
+  text-decoration: none;
+}
+.clear {
+  clear: both;
+}
+.fleft { float: left; }
+.fright { float: right; }
+.processing {
+  pointer-events: none !important;
+  input[type="submit"] {
+    color: transparent;
+  }
+}
+.liner {
+  position: relative;
+  pointer-events: none;
+  z-index: 999;
+  &.height {
+    width: 1px;
+    height: 100%;
+  }
+  &.width {
+    width: 100%;
+    height: 1px;
+  }
+}
+.marginTop10 {
+  margin-top: 10px;
+}
+.marginBottom10,
+.bottom10 {
+  margin-bottom: 10px;
+}
+.zindex--1 {
+  z-index: 1;
+  position: relative;
+}
+.hidden {
+  display: none;
+}
+.paddingTop10 { padding-top: 10px !important; }
+.paddingTop15 { padding-top: 15px !important; }
+.paddingBottom10 { padding-bottom: 10px !important; }
+.paddingBottom15 { padding-bottom: 15px !important; }
+.fullWidth { width: 100%; }
+.alignCenter { text-align: center !important; }
+.alignLeft { text-align: left !important; }
+.alignRight { text-align: right !important; }
+
+/***
+  * SERVER
+  ***/
+
+.server {
+  position: absolute;
+  z-index: 9999999;
+  top: 0;
+  background: red;
+  color: white;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 8px;
+}
+
+/***
+  * LOADING ANIMATION
+  ***/
+
+.submit_btn {
+  position: relative;
+  .scan_claim {
+    padding: 14px;
+  }
+  .spinner {
+    display: none;
+    margin: 2.5px 5px 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 30px;
+    width: 30px;
+    z-index: 30;
+  }
+  &.processing {
+    pointer-events: none;
+    .spinner {
+      display: block;
+    }
+    a, input {
+      color: transparent !important;
+    }
+  }
+  &.centered {
+    .spinner {
+      left: 50%;
+      margin-left: -15px;
+    }
+  }
+  &.right {
+    .spinner {
+      left: auto;
+      right: 0;
+    }
+  }
+}
+
+.spinner {
+  margin: 100px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  text-align: center;
+
+  -webkit-animation: rotate 2.0s infinite linear;
+  animation: rotate 2.0s infinite linear;
+}
+
+.dot1, .dot2 {
+  width: 60%;
+  height: 60%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  border-radius: 100%;
+
+  -webkit-animation: bounce 2.0s infinite ease-in-out;
+  animation: bounce 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+  top: auto;
+  bottom: 0px;
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes rotate { 100% { -webkit-transform: rotate(360deg) }}
+@keyframes rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+@-webkit-keyframes bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+@-webkit-keyframes blink {
+  0%, 100% { opacity: 1.0; }
+  50% { opacity: 0.2; }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1.0;
+  } 50% {
+    opacity: 0.2;
+  }
+}

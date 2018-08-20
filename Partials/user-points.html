@@ -1,0 +1,26 @@
+          <!-- RATINGS -->
+          <div class="spinner" rel="points">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+          </div>
+          <article class="points">
+            <div class="wrapper">
+              <div class="inner">
+                <div class="header">
+                  <h4>{{text.pointBalance}}</h4>
+                </div>
+                <div class="number">
+                  {{userDetails.current_points}}
+                </div>
+                <div ng-show="clientInfo && clientInfo.client_mode == 'merchant'" class="qr_code"></div>
+                <div ng-if="clientInfo && clientInfo.client_mode == 'merchant'" class="note">{{text.myQRnotes}}</div>
+              </div>
+            </div>
+            <ul ng-if="clientInfo && clientInfo.client_mode != 'merchant'">
+              <li class="scan">
+                <a href="#scan" submit-btn class="centered">
+                  {{text.scanForPoints}}
+                </a>
+              </li>
+            </ul>
+          </article>

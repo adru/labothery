@@ -1,0 +1,66 @@
+<div class="spinner" ng-if="leaderboard && userDetails && !userRankLoaded">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<article class="my_rank" ng-if="userDetails && userRankLoaded">
+  <div class="profile icon" ng-style="getProfilePic(userDetails)" ng-class="(userDetails.image) ? 'w_pic' : 'wo_pic'"></div>
+  <div class="wrapper">
+    <div class="inner">
+      <div class="header">
+        <div class="banner_container">
+          <div class="banner" rel="leaderboard">
+            <div class="icon" rel="leaderboard"></div>
+          </div>
+        </div>
+        <div class="fleft one">
+          <span ng-if="userRank[0].total">{{text.leaderboardRank}} </span><span ng-class="(userRank[0].total) ? 'bold' : ''" class="FRE12">{{(rank_text) ? rank_text : text.leaderboardNotYet}}</span>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="rank_display">
+        <div class="number">
+          {{(userRank[0].total) ? userRank[0].total : 0}}
+        </div>
+        <div class="text">
+          <span ng-if="userRank[0].total == 1">{{text.point}}</span>
+          <span ng-if="userRank[0].total != 1">{{text.points}}</span>
+          {{text.leaderboardPointMonth}}
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<article class="regions" ng-if="leaderboard && regions">
+  <a href="#/leaderboard/" class="region_btn" ng-class="{'selected' : !selectedRegionA}">{{text.leaderboardAll}}</a>
+  <a href="#/leaderboard/{{::regi.id}}/" ng-repeat="regi in allRegions" class="region_btn" ng-class="{'selected' : selectedRegionA == regi.id}">{{::regi.region_code}}</a>
+  <div class="clear"></div>
+</article>
+
+<div class="spinner" ng-if="!leaderboard">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<article ng-if="leaderboard">
+  <div class="wrapper">
+    <div class="bar short">
+      {{text.leaderboardTopMonth}}
+    </div>
+    <table cellpadding="0" cellspacing="0">
+      <tr ng-repeat="leader in leaderboard" ng-class="(userDetails && userDetails.id == leader.user_id) ? 'me' : ''">
+        <td class="profile icon" rel="user" ng-class="(leader.image) ? 'w_pic' : 'wo_pic'">
+          <img ng-src="{{leader.image}}" ng-if="leader.image" />
+        </td>
+        <td class="name">
+          {{leader.name}}
+        </td>
+        <td class="total">
+          {{leader.total}}
+        </td>
+      </tr>
+    </table>
+  </div>
+</article>
+<article ng-if="leaderboard && !leaderboard.length" class="noresults">
+  <p ng-bind-html="text.leaderboardNone"></p>
+</article>

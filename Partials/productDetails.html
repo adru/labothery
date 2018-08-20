@@ -1,0 +1,125 @@
+<div class="spinner" ng-if="!product">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+<a href back-button ng-if="product" class="bar medium right shadow">
+  <div class="icon" rel="left"></div>
+  <span ng-bind-html="getBackTitle()"></span>
+</a>
+<article ng-if="product" product_id="{{::product.id}}">
+  <div class="wrapper">
+    <div class="inner">
+      <div class="header">
+        <div class="banner_container" ng-if="!product.product_type || product.product_type === 'item'">
+          <div class="banner" ng-class="(product.favourited) ? product.favourited : ''" rel="heart" ng-click="toggleFav()">
+            <div class="icon" rel="heart"></div>
+            <div class="icon hidden" rel="heart"></div>
+          </div>
+        </div>
+        <div class="fleft one">
+          <h4>{{product.product_name | getTranslation:selectedLanguage}}</h4>
+          <div class="rating" rating="{{product.product_rating}}" ng-if="clientInfo && clientInfo.review_flag == 1 && (!product.product_type || product.product_type === 'item')">
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="base">
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <img ng-if="product.image" ng-src="{{::product.image | get600px}}" />
+
+    <div ng-if="clientInfo && clientInfo.order_flag == 1 && product.variations.length && purchaseAvailable" class="bar medium shadow addtocart" ng-click="addtocart();">
+      <span ng-if="!product.product_type || product.product_type === 'item'">{{text.addToCart}}</span>
+      <span ng-if="product.product_type === 'ticket'">{{text.purchaseTicket}}</span>
+      <div class="icon" rel="addtocart"></div>
+    </div>
+
+    <div class="inner price variations" ng-if="product.variations && product.variations.length >= 1" ng-repeat="var in product.variations" ng-class="{ 'last' : $last }">
+      <p class="fleft">
+        <span>{{var.variation_name | getTranslation:selectedLanguage}}</span>
+      </p>
+      <p class="fright">
+        <span>{{::var.value | currency : "$" : 2 }}</span>
+      </p>
+      <div class="clear"></div>
+      <div class="quantity" ng-if="var.quantity">
+        <span ng-bind-html="var.quantityStr"></span>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <div class="inner price" ng-if="(!product.variations || !product.variations.length) && ((product.product_priceL && product.product_priceL != '') || (product.product_priceR && product.product_priceR != ''))">
+      <p class="fleft" ng-bind-html="product.product_priceL | getTranslation:selectedLanguage | convertBR"></p>
+      <p class="fright" ng-bind-html="product.product_priceR | getTranslation:selectedLanguage | convertBR"></p>
+      <div class="clear"></div>
+    </div>
+    <div class="inner" ng-if="product.product_desc != '' && (product.product_desc | getTranslation:selectedLanguage)">
+      <p ng-bind-html="product.product_desc | getTranslation:selectedLanguage | convertBR"></p>
+    </div>
+  </div>
+</article>
+
+<div class="spinner" ng-if="product && (!ratings && !product.reviewed) && clientInfo && clientInfo.review_flag == 1 && (!product.product_type || product.product_type === 'item')">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+
+<div ng-show="product && ratings && (!userDetails || product.reviewed && !product.reviewed.id) && clientInfo && clientInfo.review_flag == 1 && (!product.product_type || product.product_type === 'item')" class="bar short shadow" rel="review" ng-click="reviewForm();">
+  <span ng-if="!userDetails">{{text.productReview}}</span> {{text.productWriteReview}}
+</div>
+
+<a class="bar short shadow pending" rel="review" ng-if="userDetails && product && product.reviewed && product.reviewed.id && !product.reviewed.approved_flag && clientInfo && clientInfo.review_flag == 1">
+  {{text.reviewPending}}
+</a>
+
+<article class="rating" ng-if="ratings && clientInfo && clientInfo.review_flag == 1" ng-repeat="rating in ratings" ng-class="(product.reviewed && product.reviewed.id && userDetails.id == rating.user_id) ? 'my_rating' : ''">
+  <div class="wrapper">
+    <div class="inner">
+      <div class="header">
+        <div class="banner_container">
+          <div class="banner" rel="start" ng-if="rating.created">
+            <div class="month">{{(rating.created) ? (rating.created *1000 | date:'MMM' | translateMonth:selectedLanguage) : ""}}</div>
+            <div class="date">{{::(rating.created) ? (rating.created *1000 | date:'dd') : ""}}</div>
+          </div>
+          <div class="banner" rel="user" ng-if="rating.user_id">
+            <div class="icon" ng-class="(rating.user_image) ? 'w_pic' : 'wo_pic'" rel="user" ng-style="getUserPic(rating)"></div>
+          </div>
+        </div>
+        <div class="fleft two">
+          <div class="rating" rating="{{::rating.rating_value}}">
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="icon" rel="star"></div>
+            <div class="base">
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+              <div class="icon" rel="star"></div>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <p ng-if="rating.rating_comment != ''">
+        {{::rating.rating_comment}}
+      </p>
+    </div>
+  </div>
+</article>
+
+<div ng-if="ratings && !ratings.length && clientInfo && clientInfo.review_flag == 1 && (!product.product_type || product.product_type === 'item')" class="noresults">
+  <p ng-bind-html="text.productReviewNone"></p>
+</div>
