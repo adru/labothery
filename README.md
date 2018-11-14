@@ -1,95 +1,69 @@
-This is the REPO for TrueBlue's Loyalty DEMO app
+# Hello World PhoneGap Template [![bitHound Score][bithound-img]][bithound-url]
+
+A PhoneGap Hello World template
+
+## Usage
+
+#### PhoneGap CLI
+
+The hello-world template is the default when you create a new application using the [phonegap-cli][phonegap-cli-url].
+
+    phonegap create my-app
+
+Create an app using this template specifically:
+
+    phonegap create my-app --template hello-world
+
+To see a list of other available PhoneGap templates:
+
+    phonegap template list
+
+## [config.xml][config-xml]
+
+#### android-minSdkVersion (Android only)
+
+Minimum SDK version supported on the target device. Maximum version is blank by default.
+
+This template sets the minimum to `14`.
+
+    <preference name="android-minSdkVersion" value="14" />
+
+#### &lt;access ...&gt; (All)
+
+This template defaults to wide open access.
+
+    <access origin="*" />
+
+It is strongly encouraged that you restrict access to external resources in your application before releasing to production.
+
+For more information on whitelist configuration, see the [Cordova Whitelist Guide][cordova-whitelist-guide] and the [Cordova Whitelist Plugin documentation][cordova-plugin-whitelist]
+
+## [www/index.html][index-html]
+
+#### Content Security Policy (CSP)
+
+The default CSP is similarly open:
+
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+
+Much like the access tag above, you are strongly encouraged to use a more restrictive CSP in production.
+
+A good starting point declaration might be:
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" />
+
+For more information on the Content Security Policy, see the [section on CSP in the Cordova Whitelist Plugin documentation][cordova-plugin-whitelist-csp].
+
+Another good resource for generating a good CSP declaration is [CSP is Awesome][csp-is-awesome]
 
 
-
-SETUP FOR NEW PROJECTS.
-
-
-APPLE DEV CONSOLE
-https://developer.apple.com/account/overview.action
-> To create app, activate push, download provisioningprofile for PhoneGap
-
-1. Identifiers > App IDs > +
-App ID Description: [Name]
-Explicit App ID: guru.trueblue.[name]
-[check] Push Notifications
-
-2. Certificates > All > +
-Apple Push Notification service SSL (Sandbox) / Apple Push Notification service SSL (Production)
-App ID: [choose]
-Upload CertificateSigningRequest.certSigningRequest
-- found in Dropbox/True Blue Marketing/Product/Development/Apple iTunes/iOS Certificates/CertificateSigningRequest.certSigningRequest
-Generate, Download aps_development.cer / aps_production.cer
-
-3. Provisioning Profiles > All > +
-iOS App Development / App Store
-App ID: [choose]
-Select certificates: [Select All]
-Select devices: [Select All]
-Profile Name: [name] Development / Distribution
-Generate, Download developer / distribution.mobileprovision
-
-4. Terminal to generate PEM development/distribution
-Generate Certificate: openssl x509 -in [name]_aps_development.cer -inform der -out [name]_devCert.pem
-Generate PEM: cat [name]_devCert.pem ios_devKey.pem > [name]_dev.pem
-- found in Dropbox/True Blue Marketing/Product/Development/Apple iTunes/iOS Certificates/ios_devKey.pem
-Test: openssl s_client -connect gateway.sandbox.push.apple.com:2195 -cert [name]_devCert.pem -key [name]_dev.pem
-Pass: trueblueguru
-Database: client.apn_key = [name].pem
-Upload _dev PEM to dev.trueblue.guru/applications/certs/[name].pem (remove _dev after upload)
-
-
-GOOGLE DEV CONSOLES
-https://console.developers.google.com/project/
-https://play.google.com/apps/publish/
-> To create app, activate push, keystore?
-
-1. Create Project > https://console.developers.google.com/project/
-[Project Name]
-[Project ID]
-
-2. APIs & auth
-APIs > Enable: Distance Matrix API, Google Cloud Messaging for Android, Google Maps Javascript API v3
-Credentials > Public API access > Create new Key: Server Applications, Browser Applications
-Database: client.gcm_key = Key for server applications
-index.html: Key for browser applications
-
-3. + Add new application > https://play.google.com/apps/publish/
-Title: [Name]
-Prepare Store Listing
-
-4. Services & APIs
-Link a sender ID: Key for server applications
-app.js: Linked Sender ID (app id created in console.dev)
-
-
-
-app.js
-
-:6 - $rootScope.clientId = client id
-> TrueBlue.db, create new client
-
-:7 - $rootScope.GCMSenderID = Linked Sender ID
-> https://console.developers.google.com/project/ > Overview > Project Number
-
-:14 - $rootScope.backTitle = "Menu"
-> When on the products page, what is it that it goes back to?
-
-:15 - $rootScope.backSearch = "the menu"
-> When searching, what are you searching?
-
-
-index.html
-
-~:199 - Google Maps API Key javascript
-> use Browser Application API Key
-
-
-
-PREPARATION FOR PRODUCTION
-:9 - API Path
-> change all to live.trueblue.guru
-
-Upload PEM to live.trueblue.guru/applications/certs/[name].pem (remove _dis after upload)
-
-DbHandler.php > executeAPNPush > switch to production ssl
+[phonegap-cli-url]: http://github.com/phonegap/phonegap-cli
+[cordova-app]: http://github.com/apache/cordova-app-hello-world
+[bithound-img]: https://www.bithound.io/github/phonegap/phonegap-app-hello-world/badges/score.svg
+[bithound-url]: https://www.bithound.io/github/phonegap/phonegap-app-hello-world
+[config-xml]: https://github.com/phonegap/phonegap-template-hello-world/blob/master/config.xml
+[index-html]: https://github.com/phonegap/phonegap-template-hello-world/blob/master/www/index.html
+[cordova-whitelist-guide]: https://cordova.apache.org/docs/en/dev/guide/appdev/whitelist/index.html
+[cordova-plugin-whitelist]: http://cordova.apache.org/docs/en/latest/reference/cordova-plugin-whitelist
+[cordova-plugin-whitelist-csp]: http://cordova.apache.org/docs/en/latest/reference/cordova-plugin-whitelist#content-security-policy
+[csp-is-awesome]: http://cspisawesome.com

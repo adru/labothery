@@ -1,0 +1,94 @@
+@import "mixins";
+
+@import "icons"; // icons!
+@import "global"; // global items
+@import "framework"; // pieces of the layout that make up large parts - header, nav, shield, content wrappers
+@import "pages";
+@import "forms";
+
+/***
+  * FONTS
+  ***/
+
+$mainFont: Arial, Helvetica, sans-serif;
+$headerFont: $mainFont;
+
+// CUSTOM FONTS
+// END CUSTOM FONTS
+
+@import "fonts-styles";
+
+/***
+  * COLOURING
+  ***/
+
+$main: #222222;
+$white: #FFFFFF;
+$black: #1f140a;
+$darkGrey: #323031;
+$lightGrey: #d0d2d3;
+$alertRed: #FF0000; // new! fav!
+
+@import "colours-default";
+
+// CUSTOM COLOURS
+// $shortcutBKG: rgba($white, 0.25);
+// $rewardBarBKG: $main;
+//
+// $liner: $white;
+// $linerShadow: transparent;
+// $header: $white;
+// $headerBKG: $main;
+// $openMenu: $main;
+// $openMenuBKG: $white;
+// $headerScanDots: $white;
+// $cartQuantity: $white;
+//
+// $welcome: $white;
+// $welcomeBKG: $black;
+//
+// $shortcut: $white;
+// $shortcutBKG: $black;
+// $shortcutBar: $main;
+//
+$rewardIcon: $white;
+$rewardIconBKG: $black;
+$pointMarker: $black;
+//
+// $top10BKG: rgba($black, 0.8);
+// $top10Details: $white;
+// $top10DetailsBKG: $main;
+//
+$selectedRegion: $white;
+$selectedRegionBorder: $white;
+// $productNameBKG: $black;
+// $reviewTextarea: $black;
+//
+// $innerLiBKG: rgba($black, 0.25);
+$noresults: $black;
+// END CUSTOM COLOURS
+
+@import "colours-styles";
+
+/***
+  * CUSTOM STYLING
+  ***/
+
+.content { // no-repeat, cover, center center, fixed
+  background-image: url('../background.jpg');
+}
+.loader .content {
+  background-image: url('../splash_7201280.png');
+  background-position: center center;
+}
+nav#header .logo {
+  width: auto;
+  height: auto;
+  max-width: 120px;
+}
+section.total.vip {
+  color: #dc143c;
+}
+.overrideBlock {
+  display: block !important;
+}

@@ -1,0 +1,15 @@
+{
+  "name": "guru.trueblue.fcmlabothery",
+  "version": "1.0.0",
+  "displayName": "Labothéry",
+  "cordova": {
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "dependencies": {
+    "cordova-ios": "latest",
+    "cordova-android": "~7.0.0"
+  }
+}

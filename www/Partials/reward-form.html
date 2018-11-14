@@ -1,0 +1,44 @@
+          <!-- REWARD CLAIMING -->
+          <div class="spinner" rel="reward" ng-if="!reward">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+          </div>
+          <article class="reward" ng-if="reward">
+            <div class="wrapper">
+              <div class="inner">
+                <div class="header">
+                  <h4 class="title">{{reward.reward_name | getTranslation:selectedLanguage}}</h4>
+                </div>
+                <p class="desc" ng-if="reward.reward_desc" ng-bind-html="reward.reward_desc | getTranslation:selectedLanguage"></p>
+              </div>
+              <div class="inner point_cost">
+                <p>{{reward.reward_points}} {{text.pointsToRedeem}}</p>
+              </div>
+              <div ng-show="userDetails" class="note" ng-if="userDetails && userDetails.current_points-cartRewardTotalPoints >= reward.reward_points && clientInfo && clientInfo.client_mode == 'merchant'">
+                {{text.claimText}}
+              </div>
+            </div>
+            <ul ng-show="userDetails" ng-if="userDetails && clientInfo && clientInfo.client_mode != 'merchant'">
+              <li class="scan" ng-if="userDetails.current_points-cartRewardTotalPoints >= reward.reward_points && reward.cart_flag === 0">
+                <div ng-click="scanClaim();" submit-btn class="scan_claim centered">
+                  {{text.scanToClaim}}
+                </div>
+              </li>
+              <li class="scan" ng-if="userDetails.current_points-cartRewardTotalPoints >= reward.reward_points && reward.cart_flag === 1">
+                <div ng-click="addRewardToCart();" submit-btn class="scan_claim centered">
+                  {{text.addToCart}}
+                </div>
+              </li>
+              <li class="claimed">
+                {{text.thankYou}}
+              </li>
+              <li class="claimed token" ng-if="redeem_token">
+                <span class="small">{{text.claimNumber}}</span><br>
+                <span class="code">{{redeem_token}}</span><br><br>
+                <span class="small">{{text.showToCash}}</span>
+              </li>
+              <li class="claimed close" ng-click="closePopup();">
+                {{text.close}}
+              </li>
+            </ul>
+          </article>

@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "733938692247",
+    "firebase_url": "https://labothery-7da59.firebaseio.com",
+    "project_id": "labothery-7da59",
+    "storage_bucket": "labothery-7da59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733938692247:android:71569f232a8af565",
+        "android_client_info": {
+          "package_name": "guru.trueblue.fcmlabothery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "733938692247-mvmvum0gnc7gigk5th042dm07frdcds6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB04RYT6akWapuiWDgK1KyL98_Y-Gm63aA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733938692247:android:41c44254f5675154",
+        "android_client_info": {
+          "package_name": "guru.trueblue.labothery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "733938692247-mvmvum0gnc7gigk5th042dm07frdcds6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB04RYT6akWapuiWDgK1KyL98_Y-Gm63aA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

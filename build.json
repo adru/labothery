@@ -1,0 +1,18 @@
+{
+    "android": {
+        "debug": {
+            "keystore": "../../assets/Android/trueblueguru.keystore",
+            "storePassword": "trueblueguru",
+            "alias": "trueblueguru",
+            "password" : "trueblueguru",
+            "keystoreType": ""
+        },
+        "release": {
+            "keystore": "../../assets/Android/trueblueguru.keystore",
+            "storePassword": "trueblueguru",
+            "alias": "trueblueguru",
+            "password" : "trueblueguru",
+            "keystoreType": ""
+        }
+    }
+}

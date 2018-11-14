@@ -1,0 +1,22 @@
+<div class="wrapper" ng-class="userDetails && 'logged-in'">
+  <div ng-show="!userDetails" ng-click="popupForm('user');" class="bar shadow welcome" rel="user">
+    <span class="welcome_name">{{text.welcome}},</span><br>
+    <span class="welcome_points">{{text.welcomeNew1}} {{clientInfo.client_name}} {{text.welcomeNew2}}</span>
+    <div class="icon" rel="user"></div>
+  </div>
+
+  <article ng-repeat="vip in vips" class="{{vip.style}}" ng-class="{'selected' : vip.selected}">
+    <div class="wrapper">
+      <div class="inner">
+        <div class="vip_name">
+          <img class="symbol" src="assets/notification_icon.png" />
+          <div class="name">{{vip.name | getTranslation:selectedLanguage}}</div>
+        </div>
+        <div class="vip_discount">{{vip.discount}}% OFF!</div>
+        <div class="clear"></div>
+        <div class="vip_desc" ng-if="!userDetails">Just earn {{vip.minimum_quantity}} points!</div>
+        <div class="vip_desc" ng-if="userDetails && vip.points_needed > 0 && !vip.selected">You need {{vip.points_needed}} more points!</div>
+      </div>
+    </div>
+  </article>
+</div>

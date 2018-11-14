@@ -1,0 +1,21 @@
+      <div class="shield" ng-click="closePopup($event);"></div>
+      <div class="icon"></div>
+      <div id="console" loading-page ng-if="popUpType == 'processing'"></div>
+      
+      <div id="console" rating-form ng-if="userDetails && currentParent == 'products'" ng-show="!showLoginInForm && popUpType == 'review'"></div>
+      <div id="console" reward-form ng-if="currentParent == 'rewards' && popUpType == 'reward'" ng-show="!showLoginInForm"></div>
+      
+      <div id="console" user-form-name ng-if="userDetails && currentParent == 'settings'"></div>
+      <div id="console" user-form-email ng-if="userDetails && currentParent == 'settings'"></div>
+      <div id="console" user-form-password ng-if="userDetails"></div>
+      
+      <div id="console" shopping-cart ng-if="clientInfo && clientInfo.order_flag" ng-show="popUpType == 'show_cart'"></div>
+      <div id="console" add-to-cart ng-if="popUpType == 'add_to_cart'"></div>
+      <div id="console" confirm-cart ng-if="popUpType == 'confirm_cart'"></div>
+      <div id="console" payment-details ng-if="popUpType == 'payment_details'"></div>
+      
+      <div id="console" my-qr ng-if="userDetails && (clientInfo && clientInfo.client_mode == 'merchant')" ng-show="popUpType == 'my_qr'"></div>
+      
+      <ul id="console" user-forms ng-if="!userDetails && clientInfo && showLoginInForm" class="login-form"></ul>
+      <div id="login" ng-click="showLoginForm()" ng-if="!userDetails && !showLoginInForm && (popUpType == 'review' || popUpType == 'user' || popUpType == 'reward')">{{text.menuLoginRegister}}</div>
+      <div class="close"></div>

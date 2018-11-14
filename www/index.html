@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Javascript Variables for TrueBlue App -->
+    <script type="text/javascript">
+      var server = null;
+      var APIversion = "v1.5";
+
+      var clientId = 35;
+
+      var stripePublicKey = null;// "pk_test_Bx0uhYEL5Iyt1KmK8pJ684xX";
+
+      var preload = ["news", "products", "categories", "locations", "rewards"];
+      var showLimit = 5;
+
+      var backIcon = "drink"; // food // products // shop // shopping
+
+      var backTitle = "Menu"; // Food // Products // Menu
+
+      var backSearch = "the menu";
+
+      var customMessageArray = {
+      };
+    </script>
+
+    <!-- Uncomment for App -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script> server = "live"; </script>
+
+    <meta http-equiv="Content-Security-Policy" content="default-src * gap://ready file:; style-src 'self' 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Labothéry</title>
+  </head>
+
+  <body class="{{currentParent}} {{selectedLanguage}}" ng-class="{'activeOrder': activeOrders}" onload="onLoad()">
+    <div class="server" ng-if="server != 'live'">{{server}}</div>
+
+    <a id="orders" ng-if="activeOrders" href="#/orders/">
+      <div class="order_status" ng-repeat="va in activeOrders track by $index | limitTo:1" ng-bind-html="orderStatusText(va);"></div>
+      <div class="icon" rel="right"></div>
+    </a>
+
+    <nav id="header" nav-header icon-image="logo.png"></nav>
+
+    <nav id="menu" ng-if="done">
+      <ul ng-if="!userDetails && clientInfo" ng-show="showLoginInNav && clientInfo && clientInfo.account_flag == 1" id="console" user-forms></ul>
+      <ul id="pages" ng-hide="showLoginInNav">
+        <menu-top></menu-top>
+        <li>
+          <a href="#/news/" ng-class="{ 'selected' : currentParent == 'news' }" ng-click="closeMenu($event)">
+            <div class="icon" rel="news"></div>
+            {{text.menuNews}}
+          </a>
+          <div class="liner width"></div>
+        </li>
+        <li>
+          <a href="#/products/" ng-class="{ 'selected' : currentParent.indexOf('products') > -1 }" ng-click="closeMenu($event)">
+            <div class="icon" rel="{{::backIcon}}"></div>
+            {{text.menuProducts}}
+          </a>
+          <div class="liner width"></div>
+        </li>
+        <li ng-if="clientInfo && clientInfo.review_flag == 1">
+          <a href="#/top10/1/{{(selectedRegion) ? selectedRegion+'/' : ''}}" ng-class="{ 'selected' : currentParent == 'top10' }" ng-click="closeMenu($event)">
+            <div class="icon" rel="top10"></div>
+            {{text.menuTop10}}
+          </a>
+          <div class="liner width"></div>
+        </li>
+        <li ng-if="clientInfo.location_count > 1">
+          <a href="#/locations/" ng-class="{ 'selected' : currentParent == 'locations' }" ng-click="closeMenu($event)">
+            <div class="icon" rel="locations"></div>
+            {{text.menuLocations}}
+          </a>
+          <div class="liner width"></div>
+        </li>
+        <li ng-if="clientInfo.location_count == 1">
+          <a href="#/locations/{{clientInfo.location_id}}/" ng-class="{ 'selected' : currentParent == 'locations' }" ng-click="closeMenu($event)">
+            <div class="icon" rel="locations"></div>
+            {{text.menuLocation}}
+          </a>
+          <div class="liner width"></div>
+        </li>
+        <li ng-if="vips && vips.length > 0">
+          <a href="#/vip/" ng-class="{ 'selected' : currentParent == 'vips' }" ng-click="closeMenu($event)">
+            <div class="icon" rel="custom"></div>
+            {{text.menuVIPs}}
+          </a>
+          <div class="liner width"></div>
+        </li>
+        <li>
+          <a href="#/rewards/" ng-class="{ 'selected' : currentParent == 'rewards' }" ng-click="closeMenu($event)">
+            <div class="icon" rel="rewards"></div>
+            {{text.menuRewards}}
+          </a>
+          <div class="liner width"></div>
+        </li>
+        <li>
+          <a href="#/leaderboard/{{(selectedRegion) ? selectedRegion+'/' : ''}}" ng-class="{ 'selected' : currentParent == 'leaderboard' }" ng-click="closeMenu($event)">
+            <div class="icon" rel="leaderboard"></div>
+            {{text.menuLeaderboard}}
+          </a>
+          <div class="liner width" ng-if="pages.length > 0"></div>
+        </li>
+        <li ng-repeat="page in pages track by $index">
+          <a href="#page/{{::page.id}}/" ng-class="{'selected' : currentParent == '{{::page.label | getTranslation:'ENG' | lowercaseTrim}}', 'noicon' : !page.icon || page.icon == ''}" ng-click="closeMenu($event)">
+            <div class="icon" rel="{{::page.icon}}" ng-if="page.icon"></div>
+            <span ng-bind-html="page.label | getTranslation:selectedLanguage"></span>
+          </a>
+          <div class="liner width" ng-hide="$index == pages.length-1"></div>
+        </li>
+
+        <menu-bottom></menu-bottom>
+      </ul>
+    </nav>
+
+    <section id="forms" ng-if="done || overrideShowQR" ng-class="{'overrideBlock' : overrideShowQR}" all-forms></section>
+
+
+    <!-- OFFLINE STUFF -->
+    <div class="offline" ng-show="offline" offline-qr></div>
+    <div id="shield" class="offline shield" ng-show="offline"></div>
+    <!-- END OFFLINE STUFF -->
+
+    <!-- APP UPDATE STUFF -->
+    <div class="update" ng-if="updateAvailable" update-page></div>
+    <div id="shield" class="offline shield" ng-if="updateAvailable"></div>
+    <!-- END APP UPDATE STUFF -->
+
+    <div id="shield" class="shield" ng-click="closeMenu($event);"></div>
+
+    <section class="content" ng-view></section>
+
+    <!-- Styles -->
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+
+    <!-- TrueBlue Scripts -->
+    <script type="text/javascript" src="js/trueBlue.other.min.js"></script>
+    <script type="text/javascript" src="js/trueBlue.angular.min.js"></script>
+    <script type="text/javascript" src="js/trueBlue.app.min.js"></script>
+    <script type="text/javascript" src="js/trueBlue.override.js"></script>
+
+    <!-- Stripe -->
+    <script>
+      if (typeof stripePublicKey != "undefined" && stripePublicKey != "") {
+        async('https://js.stripe.com/v2/', function() {
+          Stripe.setPublishableKey(stripePublicKey);
+        });
+      }
+    </script>
+
+    <!-- Inline JS -->
+    <script type="text/javascript">
+      // init for redundancy
+      if (typeof facebookConnectPlugin === "undefined") {
+        openFB.init({appId: '1523899957830230', tokenStore: window.localStorage});
+      }
+
+      function onLoad() {
+        // testing.
+        if (server != "live") {
+          setTimeout(function() {
+            console.log("dev deviceready");
+            onDeviceReady();
+          }, 1000);
+        } else {
+          console.log("onLoad");
+          document.addEventListener("deviceready", onDeviceReady, false);
+        }
+      }
+    </script>
+  </body>
+</html>

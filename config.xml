@@ -1,317 +1,203 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets"
-  xmlns:gap="http://phonegap.com/ns/1.0"
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  id="guru.trueblue.labothery"
-  android-versionCode="1000"
-  versionCode="100"
-  version="1.0.0">
-
-  <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>1.0.0</string>
-  </gap:config-file>
-
-  <name>Labothéry</name>
-
-  <description>
-    Check out Labothéry's Loyalty Program!
-  </description>
-
-  <author href="http://www.trueblue.guru" email="dev@trueblue.guru">
-    TrueBlue Mobile Software Inc
-  </author>
-
-  <preference name="orientation" value="portrait"/>
-  <preference name="fullscreen" value="false"/>
-  <preference name="target-device" value="handset"/>
-  <preference name="webviewbounce" value="true"/>
-  <preference name="prerendered-icon" value="true"/>
-  <preference name="stay-in-webview" value="false"/>
-  <preference name="ios-statusbarstyle" value="black-opaque"/>
-  <preference name="detect-data-types" value="true"/>
-  <preference name="exit-on-suspend" value="false"/>
-  <preference name="EnableViewportScale" value="true"/>
-  <preference name="MediaPlaybackRequiresUserAction" value="true"/>
-  <preference name="AllowInlineMediaPlayback" value="true"/>
-  <preference name="BackupWebStorage" value="cloud"/>
-  <preference name="TopActivityIndicator" value="gray"/>
-  <preference name="KeyboardDisplayRequiresUserAction" value="true"/>
-  <preference name="HideKeyboardFormAccessoryBar" value="true"/>
-  <preference name="SuppressesIncrementalRendering" value="true"/>
-  <preference name="KeepRunning" value="true"/>
-  <preference name="DisallowOverscroll" value="true"/>
-  <preference name="LoadUrlTimeoutValue" value="20000"/>
-  <preference name="disable-cursor" value="true"/>
-  <preference name="StatusBarOverlaysWebView" value="false"/>
-  <preference name="StatusBarBackgroundColor" value="#000000"/>
-
-  <preference name="ShowSplashScreenSpinner" value="false"/>
-  <preference name="show-splash-screen-spinner" value="false"/>
-  <preference name="auto-hide-splash-screen" value="false"/>
-  <preference name="AutoHideSplashScreen" value="false"/>
-  <preference name="SplashScreen" value="splash.png"/>
-  <preference name="SplashScreenDelay" value="10000"/>
-  <preference name="SplashMaintainAspectRatio" value="true"/>
-
-  <gap:platform name="ios"/>
-  <gap:platform name="android"/>
-
-  <icon src="res/icon/icon_40.png" gap:platform="ios" width="40" height="40"/>
-  <icon src="res/icon/icon_57.png" gap:platform="ios" width="57" height="57"/>
-  <icon src="res/icon/icon_58.png" gap:platform="ios" width="58" height="58"/>
-  <icon src="res/icon/icon_72.png" gap:platform="ios" width="72" height="72"/>
-  <icon src="res/icon/icon_76.png" gap:platform="ios" width="76" height="76"/>
-  <icon src="res/icon/icon_80.png" gap:platform="ios" width="80" height="80"/>
-  <icon src="res/icon/icon_87.png" gap:platform="ios" width="87" height="87"/>
-  <icon src="res/icon/icon_114.png" gap:platform="ios" width="114" height="114"/>
-  <icon src="res/icon/icon_120.png" gap:platform="ios" width="120" height="120"/>
-  <icon src="res/icon/icon_144.png" gap:platform="ios" width="144" height="144"/>
-  <icon src="res/icon/icon_152.png" gap:platform="ios" width="152" height="152"/>
-  <icon src="res/icon/icon_36.png" gap:platform="android" gap:density="ldpi"/>
-  <icon src="res/icon/icon_48.png" gap:platform="android" gap:density="mdpi"/>
-  <icon src="res/icon/icon_72.png" gap:platform="android" gap:density="hdpi"/>
-  <icon src="res/icon/icon_96.png" gap:platform="android" gap:density="xhdpi"/>
-  <icon src="res/icon/icon_144.png" gap:platform="android" gap:density="xxhdpi"/>
-  <icon src="res/icon/icon_192.png" gap:platform="android" gap:density="xxxhdpi"/>
-  <icon src="icon.png"/>
-
-  <gap:splash src="res/screen/splash_320480.png" gap:platform="ios" width="320" height="480"/>
-  <gap:splash src="res/screen/splash_640960.png" gap:platform="ios" width="640" height="960"/>
-  <gap:splash src="res/screen/splash_6401136.png" gap:platform="ios" width="640" height="1136"/>
-  <gap:splash src="res/screen/splash_7501334.png" gap:platform="ios" width="750" height="1334"/>
-  <gap:splash src="res/screen/splash_12422208.png" gap:platform="ios" width="1242" height="2208"/>
-  <gap:splash src="res/screen/splash_200320.png" gap:platform="android" gap:density="ldpi"/>
-  <gap:splash src="res/screen/splash_320480.png" gap:platform="android" gap:density="mdpi"/>
-  <gap:splash src="res/screen/splash_480800.png" gap:platform="android" gap:density="hdpi"/>
-  <gap:splash src="res/screen/splash_7201280.png" gap:platform="android" gap:density="xhdpi"/>
-  <gap:splash src="res/screen/splash_10801920.png" gap:platform="android" gap:density="xxhdpi"/>
-  <gap:splash src="res/screen/splash_225225.png" gap:platform="blackberry"/>
-  <gap:splash src="res/screen/splash_480800.jpg" gap:platform="winphone"/>
-  <gap:splash src="splash.png"/>
-
-
-	<preference name="android-build-tool" value="gradle" />
-  <preference name="android-minSdkVersion" value="15" />
-  <preference name="android-targetSdkVersion" value="26" />
-	<preference name="android-installLocation" value="auto" />
-
-  <plugin name="phonegap-plugin-barcodescanner" />
-  <plugin name="cordova-plugin-inappbrowser" />
-  <plugin name="cordova-plugin-appversion" source="npm" />
-  <plugin name="cordova-plugin-uniquedeviceid" source="npm" />
-
-  <plugin name="cordova-plugin-camera" source="npm" />
-  <plugin name="cordova-plugin-device" source="npm" />
-  <plugin name="cordova-plugin-geolocation" source="npm" />
-  <plugin name="cordova-plugin-network-information" source="npm" />
-  <plugin name="cordova-plugin-x-socialsharing" source="npm" />
-  <plugin name="cordova-plugin-x-toast" source="npm" />
-  <plugin name="cordova-plugin-dialogs" source="npm" />
-  <plugin name="cordova-plugin-statusbar" source="npm" />
-  <plugin name="cordova-custom-config" version="*"/>
-  <plugin name="cordova.plugins.diagnostic" source="npm" spec="4.0.8" />
-  <plugin name="cordova-plugin-appavailability" source="npm" spec="0.4.2" />
-
-  <platform name="android">
-    <preference name="phonegap-version" value="cli-7.1.0" />
-		<plugin name="cordova-android-support-gradle-release" source="npm" />
-    <plugin name="cordova-plugin-whitelist" source="npm" />
-    <plugin name="cordova-plugin-splashscreen" source="npm" />
-    <config-file target="AndroidManifest.xml" parent="/*">
-      <!-- Required on Android 6+ to access Camera runtime permissions -->
-      <uses-permission android:name="android.permission.CAMERA" />
-      <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-      <!-- Required on Android 6+ to access Location runtime permissions -->
-      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-      <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-      <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-      <!-- October 15th, 2016 - Google Play change to Android ACCESS_FINE_LOCATION permissions -->
-      <uses-feature android:name="android.hardware.location.gps" />
+<?xml version='1.0' encoding='utf-8'?>
+<widget android-versionCode="1000" id="guru.trueblue.labothery" version="1.0.0" versionCode="100" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:gap="http://phonegap.com/ns/1.0">
+    <gap:config-file parent="CFBundleShortVersionString" platform="ios">
+        <string>1.0.0</string>
+    </gap:config-file>
+    <name>Labothéry</name>
+    <description>
+      Check out Labothéry's Loyalty Program!
+    </description>
+    <author email="dev@trueblue.guru" href="http://www.trueblue.guru">
+      TrueBlue Mobile Software Inc
+    </author>
+    <content src="index.html" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="orientation" value="portrait" />
+    <preference name="fullscreen" value="false" />
+    <preference name="target-device" value="handset" />
+    <preference name="webviewbounce" value="true" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="stay-in-webview" value="false" />
+    <preference name="ios-statusbarstyle" value="black-opaque" />
+    <preference name="detect-data-types" value="true" />
+    <preference name="exit-on-suspend" value="false" />
+    <preference name="EnableViewportScale" value="true" />
+    <preference name="MediaPlaybackRequiresUserAction" value="true" />
+    <preference name="AllowInlineMediaPlayback" value="true" />
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="TopActivityIndicator" value="gray" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="HideKeyboardFormAccessoryBar" value="true" />
+    <preference name="SuppressesIncrementalRendering" value="true" />
+    <preference name="KeepRunning" value="true" />
+    <preference name="LoadUrlTimeoutValue" value="20000" />
+    <preference name="disable-cursor" value="true" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="show-splash-screen-spinner" value="false" />
+    <preference name="auto-hide-splash-screen" value="false" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="SplashScreen" value="splash.png" />
+    <preference name="SplashScreenDelay" value="10000" />
+    <preference name="SplashMaintainAspectRatio" value="true" />
+    <platform name="android">
+        <icon density="ldpi" src="www/res/icons/android/drawable-ldpi-icon.png" />
+        <icon density="mdpi" src="www/res/icons/android/drawable-mdpi-icon.png" />
+        <icon density="hdpi" src="www/res/icons/android/drawable-hdpi-icon.png" />
+        <icon density="xhdpi" src="www/res/icons/android/drawable-xhdpi-icon.png" />
+        <icon density="xxhdpi" src="www/res/icons/android/drawable-xxhdpi-icon.png" />
+        <icon density="xxxhdpi" src="www/res/icons/android/drawable-xxxhdpi-icon.png" />
+        <splash density="port-ldpi" src="www/res/screens/android/drawable-port-ldpi-screen.png" />
+        <splash density="port-mdpi" src="www/res/screens/android/drawable-port-mdpi-screen.png" />
+        <splash density="port-hdpi" src="www/res/screens/android/drawable-port-hdpi-screen.png" />
+        <splash density="port-xhdpi" src="www/res/screens/android/drawable-port-xhdpi-screen.png" />
+        <splash density="port-xxhdpi" src="www/res/screens/android/drawable-port-xxhdpi-screen.png" />
+        <splash density="port-xxxhdpi" src="www/res/screens/android/drawable-port-xxxhdpi-screen.png" />
+        <resource-file src="www/res/notification_icons/android/drawable-mdpi/notification_icon.png" target="app/src/main/res/drawable-mdpi/notification_icon.png" />
+        <resource-file src="www/res/notification_icons/android/drawable-hdpi/notification_icon.png" target="app/src/main/res/drawable-hdpi/notification_icon.png" />
+        <resource-file src="www/res/notification_icons/android/drawable-xhdpi/notification_icon.png" target="app/src/main/res/drawable-xhdpi/notification_icon.png" />
+        <resource-file src="www/res/notification_icons/android/drawable-xxhdpi/notification_icon.png" target="app/src/main/res/drawable-xxhdpi/notification_icon.png" />
+        <resource-file src="www/res/notification_icons/android/drawable-xxxhdpi/notification_icon.png" target="app/src/main/res/drawable-xxxhdpi/notification_icon.png" />
+    </platform>
+    <platform name="ios">
+        <icon height="57" platform="ios" src="www/res/icons/ios/icon.png" width="57" />
+        <icon height="114" platform="ios" src="www/res/icons/ios/icon@2x.png" width="114" />
+        <icon height="40" platform="ios" src="www/res/icons/ios/icon-40.png" width="40" />
+        <icon height="80" platform="ios" src="www/res/icons/ios/icon-40@2x.png" width="80" />
+        <icon height="50" platform="ios" src="www/res/icons/ios/icon-50.png" width="50" />
+        <icon height="100" platform="ios" src="www/res/icons/ios/icon-50@2x.png" width="100" />
+        <icon height="60" platform="ios" src="www/res/icons/ios/icon-60.png" width="60" />
+        <icon height="120" platform="ios" src="www/res/icons/ios/icon-60@2x.png" width="120" />
+        <icon height="180" platform="ios" src="www/res/icons/ios/icon-60@3x.png" width="180" />
+        <icon height="72" platform="ios" src="www/res/icons/ios/icon-72.png" width="72" />
+        <icon height="144" platform="ios" src="www/res/icons/ios/icon-72@2x.png" width="144" />
+        <icon height="76" platform="ios" src="www/res/icons/ios/icon-76.png" width="76" />
+        <icon height="152" platform="ios" src="www/res/icons/ios/icon-76@2x.png" width="152" />
+        <icon height="29" platform="ios" src="www/res/icons/ios/icon-small.png" width="29" />
+        <icon height="58" platform="ios" src="www/res/icons/ios/icon-small@2x.png" width="58" />
+        <icon height="87" platform="ios" src="www/res/icons/ios/icon-small@3x.png" width="87" />
+        <splash height="1136" platform="ios" src="www/res/screens/ios/Default-568h@2x~iphone.png" width="640" />
+        <splash height="1334" platform="ios" src="www/res/screens/ios/Default-667h.png" width="750" />
+        <splash height="2208" platform="ios" src="www/res/screens/ios/Default-736h.png" width="1242" />
+        <splash height="2048" platform="ios" src="www/res/screens/ios/Default-Portrait@2x~ipad.png" width="1536" />
+        <splash height="1024" platform="ios" src="www/res/screens/ios/Default-Portrait~ipad.png" width="768" />
+        <splash height="960" platform="ios" src="www/res/screens/ios/Default@2x~iphone.png" width="640" />
+        <splash height="480" platform="ios" src="www/res/screens/ios/Default~iphone.png" width="320" />
+    </platform>
+    <access origin="*" />
+    <access origin="http://*.trueblue.guru" />
+    <access origin="https://*.trueblue.guru" />
+    <access origin="https://maps.googleapis.com" />
+    <access origin="http://*.facebook.com" />
+    <access origin="https://*.facebook.com" />
+    <access origin="https://*.instagram.com" />
+    <access origin="https://*.cdninstagram.com" />
+    <access origin="https://*.akamaihd.net" />
+    <access origin="https://*.stripe.com" />
+    <access origin="https://*.youtube.com" />
+    <access launch-external="yes" origin="mailto:*" />
+    <access launch-external="yes" origin="geo:*" />
+    <access launch-external="yes" origin="maps:*" />
+    <access launch-external="yes" origin="tel:*" />
+    <access launch-external="yes" origin="sms:*" />
+    <access launch-external="yes" origin="fb:*" />
+    <access launch-external="yes" origin="itms:*" />
+    <access launch-external="yes" origin="market:*" />
+    <access launch-external="yes" origin="instagram:*" />
+    <access launch-external="yes" origin="youtube:*" />
+    <allow-intent href="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <allow-intent href="maps:*" />
+    <allow-intent href="fb://*" />
+    <allow-intent href="instagram://*" />
+    <allow-intent href="youtube://*" />
+    <allow-navigation href="*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    <config-file parent="/*" target="AndroidManifest.xml">
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.CAMERA" />
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+        <uses-feature android:name="android.hardware.location.gps" />
     </config-file>
-
-    <plugin name="cordova-plugin-facebook4" source="npm" spec="1.7.1">
-      <param name="APP_ID" value="1523899957830230" />
-      <param name="APP_NAME" value="TrueBlue Loyalty Apps" />
+    <platform name="ios">
+        <gap:config-file parent="NSLocationUsageDescription" platform="ios">
+            <string>Your location is collected in order to inform you of the distance of each location as well as to collect some usage data.</string>
+        </gap:config-file>
+        <gap:config-file parent="NSLocationWhenInUseUsageDescription" platform="ios">
+            <string>Your location is collected in order to inform you of the distance of each location as well as to collect some usage data.</string>
+        </gap:config-file>
+        <gap:config-file parent="NSCameraUsageDescription" platform="ios">
+            <string>The camera is used to capture QR codes to collect points and redeem rewards.</string>
+        </gap:config-file>
+        <gap:config-file parent="NSPhotoLibraryUsageDescription" platform="ios">
+            <string>The camera is used to capture QR codes to collect points and redeem rewards.</string>
+        </gap:config-file>
+        <gap:config-file parent="NSBluetoothPeripheralUsageDescription" platform="ios">
+            <string>This is not actually used, but bundled up in one permission.</string>
+        </gap:config-file>
+        <gap:config-file parent="NSMicrophoneUsageDescription" platform="ios">
+            <string>This is not actually used, but bundled up in one permission.</string>
+        </gap:config-file>
+    </platform>
+    <config-file parent="/resources" target="./res/values/strings.xml">
+        <string name="fb_app_id">1523899957830230</string>
+        <string name="fb_app_name">TrueBlue Loyalty Apps</string>
+    </config-file>
+    <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.2.4" />
+    <plugin name="cordova-plugin-camera" source="npm" spec="~2.4.1" />
+    <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.4.3" />
+    <plugin name="cordova-plugin-device" source="npm" spec="~1.1.6" />
+    <plugin name="cordova-plugin-dialogs" source="npm" spec="~1.3.3" />
+    <plugin name="cordova-plugin-file" source="npm" spec="~4.3.3" />
+    <plugin name="cordova-plugin-geolocation" source="npm" spec="~2.4.3" />
+    <plugin name="cordova-plugin-globalization" source="npm" spec="~1.0.7" />
+    <plugin name="cordova-plugin-inappbrowser" source="npm" spec="~1.7.1" />
+    <plugin name="cordova-plugin-network-information" source="npm" spec="~1.3.3" />
+    <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.5" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
+    <plugin name="cordova-plugin-appversion" spec="^1.0.0" />
+    <plugin name="cordova-unique-device-id" spec="^1.3.2" />
+    <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.1" />
+    <plugin name="cordova-plugin-x-toast" spec="^2.7.0" />
+    <plugin name="cordova.plugins.diagnostic" spec="^4.0.10" />
+    <plugin name="phonegap-plugin-barcodescanner" spec="~8.0.0">
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
-
-    <plugin name="phonegap-plugin-push" spec="1.8.3">
-      <param name="SENDER_ID" value="482745107251" />
+    <plugin name="cordova-plugin-facebook4" spec="1.7.4">
+        <variable name="APP_ID" value="1523899957830230" />
+        <variable name="APP_NAME" value="TrueBlue Loyalty Apps" />
     </plugin>
-  </platform>
-
-  <platform name="ios">
-    <preference name="phonegap-version" value="cli-6.5.0" />
-    <plugin name="cordova-plugin-splashscreen" source="npm" spec="3.0.0" />
-		<plugin name="cordova-plugin-legacy-whitelist" source="npm" />
-
-    <plugin name="cordova-plugin-facebook4" source="npm" spec="1.7.4">
-      <param name="APP_ID" value="1523899957830230" />
-      <param name="APP_NAME" value="TrueBlue Loyalty Apps" />
-    </plugin>
-
-    <plugin name="phonegap-plugin-push" spec="1.5.3" />
-  </platform>
-
-  <plugin name="cordova-plugin-customurlscheme" source="npm">
-    <param name="URL_SCHEME" value="fb1523899957830230truebluegrotto"/>
-  </plugin>
-
-  <gap:config-file platform="ios" parent="FacebookUrlSchemeSuffix">
-    <string>truebluegrotto</string>
-  </gap:config-file>
-
-  <!-- IOS COCOA KEYS -->
-  <gap:config-file platform="ios" parent="NSLocationUsageDescription">
-    <string>Your location is collected in order to inform you of the distance of each location as well as to collect some usage data.</string>
-  </gap:config-file>
-  <gap:config-file platform="ios" parent="NSLocationWhenInUseUsageDescription">
-    <string>Your location is collected in order to inform you of the distance of each location as well as to collect some usage data.</string>
-  </gap:config-file>
-  <gap:config-file platform="ios" parent="NSCameraUsageDescription">
-    <string>The camera is used to capture QR codes to collect points and redeem rewards.</string>
-  </gap:config-file>
-  <gap:config-file platform="ios" parent="NSPhotoLibraryUsageDescription">
-    <string>The camera is used to capture QR codes to collect points and redeem rewards.</string>
-  </gap:config-file>
-  <gap:config-file platform="ios" parent="NSBluetoothPeripheralUsageDescription">
-    <string>This is not actually used, but bundled up in one permission.</string>
-  </gap:config-file>
-  <gap:config-file platform="ios" parent="NSMicrophoneUsageDescription">
-    <string>This is not actually used, but bundled up in one permission.</string>
-  </gap:config-file>
-
-  <engine name="android" spec="latest" />
-  <engine name="ios" spec="latest" />
-
-  <!-- <access origin="*" /> -->
-  <access origin="http://*.trueblue.guru"/>
-  <!-- client images -->
-  <access origin="https://*.trueblue.guru"/>
-  <!-- client images -->
-  <access origin="https://maps.googleapis.com"/>
-  <!-- distance -->
-  <access origin="http://*.facebook.com"/>
-  <!-- profile pic -->
-  <access origin="https://*.facebook.com"/>
-  <!-- profile pic -->
-  <access origin="https://*.instagram.com"/>
-  <!-- instagram feed -->
-  <access origin="https://*.cdninstagram.com"/>
-  <!-- instagram feed -->
-  <access origin="https://*.akamaihd.net"/>
-  <!-- instagram feed -->
-  <access origin="https://*.stripe.com"/>
-  <!-- stripe api -->
-  <access origin="https://*.youtube.com"/>
-  <!-- youtube api -->
-
-  <allow-navigation href="*"/>
-  <allow-intent href="*"/>
-
-  <!-- legacy whitelist because of iOS 4.0.0 -->
-  <access origin="mailto:*" launch-external="yes"/>
-  <access origin="geo:*" launch-external="yes"/>
-  <access origin="maps:*" launch-external="yes"/>
-  <access origin="tel:*" launch-external="yes"/>
-  <access origin="sms:*" launch-external="yes"/>
-  <access origin="fb:*" launch-external="yes"/>
-  <access origin="itms:*" launch-external="yes"/>
-  <access origin="market:*" launch-external="yes"/>
-  <access origin="instagram:*" launch-external="yes"/>
-  <access origin="youtube:*" launch-external="yes"/>
-  <!-- end -->
-
-  <allow-intent href="http://*/*"/>
-  <allow-intent href="https://*/*"/>
-  <allow-intent href="tel:*"/>
-  <allow-intent href="sms:*"/>
-  <allow-intent href="mailto:*"/>
-  <allow-intent href="geo:*"/>
-  <allow-intent href="maps:*"/>
-  <allow-intent href="fb://*"/>
-  <allow-intent href="instagram://*"/>
-  <allow-intent href="youtube://*"/>
-  <platform name="android">
-    <allow-intent href="market:*"/>
-  </platform>
-  <platform name="ios">
-    <allow-intent href="itms:*"/>
-    <allow-intent href="itms-apps:*"/>
-  </platform>
-  <gap:config-file platform="ios" parent="LSApplicationQueriesSchemes">
-    <string>fb</string>
-  </gap:config-file>
-  <gap:config-file platform="android" parent="/manifest">
-    <application android:hardwareAccelerated="true"/>
-  </gap:config-file>
-
-  <!-- iOS Stuff for FB -->
-  <gap:config-file platform="ios" parent="NSAppTransportSecurity" mode="replace">
-    <dict>
-      <key>NSAllowsArbitraryLoads</key>
-      <true/>
-      <key>NSExceptionDomains</key>
-      <dict>
-        <key>facebook.com</key>
-        <dict>
-          <key>NSIncludesSubdomains</key>
-          <true/>
-          <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-          <false/>
-        </dict>
-        <key>fbcdn.net</key>
-        <dict>
-          <key>NSIncludesSubdomains</key>
-          <true/>
-          <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-          <false/>
-        </dict>
-        <key>akamaihd.net</key>
-        <dict>
-          <key>NSIncludesSubdomains</key>
-          <true/>
-          <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-          <false/>
-        </dict>
-      </dict>
-    </dict>
-  </gap:config-file>
-  <gap:config-file platform="ios" parent="LSApplicationQueriesSchemes" mode="replace">
-    <array>
-      <string>fb</string>
-      <string>twitter</string>
-      <string>gplus</string>
-      <string>pintrest</string>
-      <string>instagram</string>
-      <string>youtube</string>
-      <string>vnd.youtube</string>
-      <string>yelp</string>
-      <string>linkedin</string>
-      <string>tumblr</string>
-      <string>whatsapp</string>
-      <string>snapchat</string>
-      <string>comgooglemaps</string>
-      <string>amazon</string>
-      <string>skype</string>
-      <string>googledrive</string>
-      <string>itms-apps</string>
-      <string>paypal</string>
-      <string>fbapi</string>
-      <string>fbapi20130214</string>
-      <string>fbapi20130410</string>
-      <string>fbapi20130702</string>
-      <string>fbapi20131010</string>
-      <string>fbapi20131219</string>
-      <string>fbapi20140410</string>
-      <string>fbapi20140116</string>
-      <string>fbapi20150313</string>
-      <string>fbapi20150629</string>
-      <string>fbauth</string>
-      <string>fbauth2</string>
-      <string>fb-messenger-api20140430</string>
-      <string>fb-messenger-api</string>
-      <string>fbshareextension</string>
-    </array>
-  </gap:config-file>
+    <platform name="android">
+        <plugin name="cordova-plugin-firebase" spec="~2.0.4" />
+    </platform>
+    <platform name="ios">
+        <preference name="phonegap-version" value="cli-6.5.0" />
+        <plugin name="phonegap-plugin-push" spec="1.11.1" />
+        <plugin name="cordova-plugin-customurlscheme" source="npm">
+            <param name="URL_SCHEME" value="fb1523899957830230truebluelabothery" />
+        </plugin>
+        <gap:config-file parent="FacebookUrlSchemeSuffix" platform="ios">
+            <string>truebluelabothery</string>
+        </gap:config-file>
+    </platform>
+    <engine name="ios" spec="latest" />
+    <engine name="android" spec="~7.0.0" />
 </widget>
